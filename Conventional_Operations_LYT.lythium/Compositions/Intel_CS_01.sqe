@@ -1,0 +1,145 @@
+version=54;
+center[]={3588.9412,5,1743.4165};
+class items
+{
+	items=1;
+	class Item0
+	{
+		dataType="Layer";
+		name="Intel_CS_01";
+		class Entities
+		{
+			items=2;
+			class Item0
+			{
+				dataType="Layer";
+				name="Intel_CS_01";
+				class Entities
+				{
+					items=2;
+					class Item0
+					{
+						dataType="Layer";
+						name="Intel_04";
+						class Entities
+						{
+							items=1;
+							class Item0
+							{
+								dataType="Layer";
+								name="Firing_Post_CSAT_4";
+								class Entities
+								{
+									items=1;
+									class Item0
+									{
+										dataType="Layer";
+										name="Firing_Post_CSAT_6";
+										class Entities
+										{
+											items=1;
+											class Item0
+											{
+												dataType="Layer";
+												name="Firing_Post_CSAT_7";
+												class Entities
+												{
+													items=1;
+													class Item0
+													{
+														dataType="Layer";
+														name="Firing_Post_CSAT_9";
+														class Entities
+														{
+															items=1;
+															class Item0
+															{
+																dataType="Object";
+																class PositionInfo
+																{
+																	position[]={0.34692383,0.44388819,0.019897461};
+																	angles[]={-0,6.2424979,0};
+																};
+																side="Empty";
+																flags=4;
+																class Attributes
+																{
+																	name="TI_12";
+																	disableSimulation=1;
+																};
+																id=18;
+																type="Land_PortableDesk_01_sand_F";
+																class CustomAttributes
+																{
+																	class Attribute0
+																	{
+																		property="allowDamage";
+																		expression="_this allowdamage _value;";
+																		class Value
+																		{
+																			class data
+																			{
+																				singleType="BOOL";
+																				value=0;
+																			};
+																		};
+																	};
+																	nAttributes=1;
+																};
+															};
+														};
+														id=17;
+													};
+												};
+												id=16;
+											};
+										};
+										id=15;
+									};
+								};
+								id=14;
+							};
+						};
+						id=13;
+					};
+					class Item1
+					{
+						dataType="Object";
+						class PositionInfo
+						{
+							position[]={-0.4765625,0.93355656,-0.056518555};
+							angles[]={0,5.5715318,0};
+						};
+						side="Empty";
+						class Attributes
+						{
+						};
+						id=19;
+						type="Land_PortableLongRangeRadio_F";
+						atlOffset=0.031117439;
+					};
+				};
+				id=12;
+				atlOffset=0.45902634;
+			};
+			class Item1
+			{
+				dataType="Object";
+				class PositionInfo
+				{
+					position[]={0.12890625,0.90338182,0.036499023};
+				};
+				side="Empty";
+				class Attributes
+				{
+					init="call{[  " \n " this,             " \n " ""Gather Intel"",            " \n " ""\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_search_ca.paa"",   " \n " ""\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_search_ca.paa"",   " \n " ""_this distance _target < 3"",        " \n " ""_caller distance _target < 3"",        " \n " {},              " \n " {},               " \n " {   " \n "  " \n "[(_this select 0)] execVM ""Scripts\Mission_Pilot_Seq.sqf"";  " \n "" \n " },     " \n " {},               " \n " [],              " \n " 3,             " \n " 0,              " \n " true,              " \n " false              " \n "] remoteExec [""BIS_fnc_holdActionAdd"", 0, this]; }";
+				};
+				id=21;
+				type="Land_File2_F";
+				atlOffset=0.89599991;
+			};
+		};
+		id=22;
+		atlOffset=0.80236197;
+	};
+};
