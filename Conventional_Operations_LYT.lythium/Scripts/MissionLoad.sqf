@@ -64,7 +64,7 @@ _NewVeh = createVehicle [_Type, [0,0, (500 + random 2000)], [], 0, "CAN_COLLIDE"
 
      _NewVeh setVectorDirAndUp _DirUp;
      _NewVeh setPosASL _posASL;
-	 
+
 _vehicleConfig = (configFile >> "CfgVehicles" >> typeOf _NewVeh);
 _crewType = [west, _vehicleConfig] call BIS_fnc_selectCrew;
 _CrewFull = createVehicleCrew _NewVeh ;
