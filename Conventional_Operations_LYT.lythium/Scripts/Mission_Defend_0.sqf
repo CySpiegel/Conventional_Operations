@@ -66,9 +66,10 @@ ENMASSmarkerName setMarkerAlpha 0.5 ;
  	[parseText "<t color='#FF3619' font='PuristaBold' align = 'right' shadow = '1' size='3'>! WARNING !</t><br /><t  color='#FF3619'  align = 'right' shadow = '1' size='1.6'>Friendly Objective is Under Attack</t>", [0, 0.5, 1, 1], nil, 13, 1.7, 0] remoteExec ["BIS_fnc_textTiles", 0];
 	sleep 1.5 ;
 	
- {openMap true; } remoteExec ["call", 0]; 
- [markerSize ENMASSmarkerName, markerPos ENMASSmarkerName, 1 ] remoteExecCall ["BIS_fnc_zoomOnArea" , 0];
-
+//  {openMap true; } remoteExec ["call", 0]; 
+//  [markerSize ENMASSmarkerName, markerPos ENMASSmarkerName, 1 ] remoteExecCall ["BIS_fnc_zoomOnArea" , 0];
+_attackingAtGrid = mapGridPosition getMarkerPos ENMASSmarkername;
+[[west,"HQ"], "Friendly Location Under Enemy attack at grid " + _attackingAtGrid] remoteExec ["sideChat", 0];
 
 			[_CNTR] execVM "Scripts\VehiInsert_CSAT.sqf";
 			[_CNTR] execVM "Scripts\HeliInsert_CSAT.sqf";
