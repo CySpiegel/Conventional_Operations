@@ -1,118 +1,110 @@
+_missionTag = missionname;
+_missionTag = [_missionTag] call BIS_fnc_filterstring;
 
-_missionTag = missionName;
-_missionTag = [_missionTag] call BIS_fnc_filterString;
+private _MarkerDataname = _missionTag + "_markers";
+private _vehicleDataname = _missionTag + "_vehicles";
+private _ObjectDataname = _missionTag + "_Objects";
+private _Markertimename = _missionTag + "_time";
 
-private _MarkerDataName = _missionTag + "_markers";
-private _VehicleDataName = _missionTag + "_Vehicles";
-private _ObjectDataName = _missionTag + "_Objects";
-private _MarkerTimeName = _missionTag + "_Time";
+// private _date = profileNamespace getVariable _Markertimename;
+if (!isnil "_date") then {
+    setDate _date;
+};
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// sleep 2;
 
-private _date = profileNamespace getVariable _MarkerTimeName;
-if (!isNil "_date") then { setDate _date; };
+private _getVariableMark = profileNamespace getVariable _MarkerDataname;
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-sleep 2 ;
-
-
-private _GetVariableMark = profileNamespace getVariable _MarkerDataName;
-
-_allMarkNames = keys _GetVariableMark;
+_allMarknames = keys _getVariableMark;
 
 {
 _M = _x;
-_MrkAtts = _GetVariableMark get _x;
-_MPos = _MrkAtts get "pos";
-_MType = _MrkAtts get "type";
-_MSize = _MrkAtts get "size";
-_MText = _MrkAtts get "text";
-_MBrush = _MrkAtts get "brush";
-_MShape = _MrkAtts get "shape";
-_MDir = _MrkAtts get "dir";
-_Mcolor = _MrkAtts get "color";
-_MAlpha = _MrkAtts get "alpha";
+    _MrkAtts = _getVariableMark get _x;
+    _MPos = _MrkAtts get "pos";
+    _Mtype = _MrkAtts get "type";
+    _Msize = _MrkAtts get "size";
+    _Mtext = _MrkAtts get "text";
+    _MBrush = _MrkAtts get "brush";
+    _MShape = _MrkAtts get "shape";
+    _MDir = _MrkAtts get "dir";
+    _Mcolor = _MrkAtts get "color";
+    _MAlpha = _MrkAtts get "alpha";
+    
+    _mrkr = createMarkerlocal [_M, [0, 0, 0]];
+    _mrkr setMarkerPosLocal _MPos;
+    _mrkr setMarkertypeLocal _Mtype;
+    _mrkr setMarkerBrushLocal _MBrush;
+    _mrkr setMarkerShapeLocal _MShape;
+    _mrkr setMarkersizeLocal _Msize;
+    _mrkr setMarkertextLocal _Mtext;
+    _mrkr setMarkerDirLocal _MDir;
+    _mrkr setMarkerColor _Mcolor;
+    _mrkr setMarkerAlpha _MAlpha;
+} forEach _allMarknames;
 
-_mrkr = createMarkerLocal [_M,[0,0,0]] ;
-_mrkr setMarkerPosLocal _MPos ;
-_mrkr setMarkerTypeLocal _MType;
-_mrkr setMarkerBrushLocal _MBrush; 
-_mrkr setMarkerShapeLocal _MShape; 
-_mrkr setMarkerSizeLocal _MSize; 
-_mrkr setMarkerTextLocal  _MText; 
-_mrkr setMarkerDirLocal _MDir; 
-_mrkr setMarkerColor _Mcolor;
-_mrkr setMarkerAlpha _MAlpha; 
-} forEach _allMarkNames ; 
+// sleep 2;
 
+private _getVariableVeh = profileNamespace getVariable _vehicleDataname;
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-sleep 2 ;
-
-private _GetVariableVeh = profileNamespace getVariable _VehicleDataName;
-
-_allVehNames = keys _GetVariableVeh;
+_allVehnames = keys _getVariableVeh;
 
 {
-_VehAtts = _GetVariableVeh get _x;
-_posASL = _VehAtts get "posASL";
-_Type = _VehAtts get "type";
-_DirUp = _VehAtts get "vectorDirAndUp";
+    _VehAtts = _getVariableVeh get _x;
+    _posASL = _VehAtts get "posASL";
+    _type = _VehAtts get "type";
+    _DirUp = _VehAtts get "vectorDirandUp";
+    
+    _NewVeh = createvehicle [_type, [0, 0, (500 + random 2000)], [], 0, "CAN_COLLIDE"];
+    
+    _NewVeh setvectorDirAndUp _DirUp;
+    _NewVeh setPosASL _posASL;
+    
+    _vehicleConfig = (configFile >> "Cfgvehicles" >> typeOf _NewVeh);
+    _crewtype = [west, _vehicleConfig] call BIS_fnc_selectcrew;
+    _crewFull = createvehiclecrew _NewVeh;
+    _crewSelCnt = count (units _crewFull) - 1;
+    deletevehicleCrew _NewVeh;
+    sleep 1;
+    _group = creategroup west;
+    for "_x" from 0 to _crewSelCnt do {
+        _unit = _group createUnit [_crewtype, [0, 0, 0], [], 0, "CAN_COLLIDE"];
+    };
+    {
+        _x moveInAny _NewVeh
+    } forEach units _group;
+    {
+        [_x] joinSilent _group
+    } forEach units _group;
+} forEach _allVehnames;
 
-_NewVeh = createVehicle [_Type, [0,0, (500 + random 2000)], [], 0, "CAN_COLLIDE"] ;
-
-     _NewVeh setVectorDirAndUp _DirUp;
-     _NewVeh setPosASL _posASL;
-
-_vehicleConfig = (configFile >> "CfgVehicles" >> typeOf _NewVeh);
-_crewType = [west, _vehicleConfig] call BIS_fnc_selectCrew;
-_CrewFull = createVehicleCrew _NewVeh ;
-_CrewSelCnt = count (units _CrewFull) - 1; 
-deleteVehicleCrew _NewVeh;
-sleep 1;
-_Group = createGroup West ; 
-for "_x" from 0 to _CrewSelCnt do { _unit = _Group createunit [_crewType,[0,0,0], [], 0, "CAN_COLLIDE"]; }; 
-{_x moveInAny _NewVeh} foreach units _Group;  
-	{ [_x] JoinSilent _Group } foreach units _Group;  
-
-
-
-} forEach _allVehNames ; 
-
-_VEHs = nearestobjects [(position player),[
-F_Heli_01,
-F_Heli_02,
-F_Heli_03,
-F_Heli_04,
-F_Heli_05
-],40000] ;
-
-{(group (driver _x)) setVariable ["Vcm_Disable",true]; } forEach _VEHs ; 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-sleep 2 ;
-
-
-private _GetVariableStatic = profileNamespace getVariable _ObjectDataName;
-
-_allVehNames = keys _GetVariableStatic;
+_VEHs = nearestobjects [(position player), [
+    F_Heli_01,
+    F_Heli_02,
+    F_Heli_03,
+    F_Heli_04,
+    F_Heli_05
+], 40000];
 
 {
-_StcAtts = _GetVariableStatic get _x;
-_posASL = _StcAtts get "posASL";
-_Type = _StcAtts get "type";
-_DirUp = _StcAtts get "vectorDirAndUp";
+    (group (driver _x)) setVariable ["Vcm_Disable", true];
+} forEach _VEHs;
+// sleep 2;
 
-_NewVeh = createVehicle [_Type, [0,0, (500 + random 2000)], [], 0, "CAN_COLLIDE"] ;
-     _NewVeh setVectorDirAndUp _DirUp;
-     _NewVeh setPosASL _posASL;
-} forEach _allVehNames ; 
+private _getVariableStatic = profileNamespace getVariable _ObjectDataname;
 
+_allVehnames = keys _getVariableStatic;
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-sleep 2 ;
+{
+    _StcAtts = _getVariableStatic get _x;
+    _posASL = _StcAtts get "posASL";
+    _type = _StcAtts get "type";
+    _DirUp = _StcAtts get "vectorDirandUp";
+    
+    _NewVeh = createvehicle [_type, [0, 0, (500 + random 2000)], [], 0, "CAN_COLLIDE"];
+    _NewVeh setvectorDirAndUp _DirUp;
+    _NewVeh setPosASL _posASL;
+} forEach _allVehnames;
 
-MissionLoadedLitterally = 1 ;
-publicVariable "MissionLoadedLitterally";
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// sleep 2;
+MissionloadedLitterally = 1;
+publicVariable "MissionloadedLitterally";

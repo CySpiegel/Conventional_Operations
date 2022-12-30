@@ -88,6 +88,8 @@ if (count _humanplayers > 0) then {
     
     //{openMap true;} remoteExec ["call", 0];
     //[markersize ENMASSmarkername, markerPos ENMASSmarkername, 1 ] remoteExecCall ["BIS_fnc_zoomOnArea", 0];
+	_attackingAtGrid = mapGridPosition getMarkerPos ENMASSmarkername;
+	[west, "HQ"] sideChat "Friendly Location Under Enemy attack at grid " + _attackingAtGrid;
     
     [_CNTR] execVM "Scripts\Vehiinsert_CSAT.sqf";
     [_CNTR] execVM "Scripts\Heliinsert_CSAT.sqf";

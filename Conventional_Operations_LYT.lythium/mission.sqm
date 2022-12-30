@@ -20,14 +20,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=2033;
+		nextID=2045;
 	};
 	class Camera
 	{
 		pos[]={29914.566,118.002,-213.16454};
-		dir[]={0.011451537,-0.92050737,0.39057288};
-		up[]={0.026977776,0.39072028,0.92011487};
-		aside[]={0.99957496,1.4777925e-007,-0.029307421};
+		dir[]={0.011451479,-0.92050183,0.39057046};
+		up[]={0.026977411,0.39073828,0.92010647};
+		aside[]={0.99957055,9.3132257e-010,-0.029307287};
 	};
 };
 binarizationWanted=0;
@@ -230,7 +230,7 @@ class Mission
 {
 	class Intel
 	{
-		briefingName="Conventional Operations [2.3.0]";
+		briefingName="Conventional Operations [2.3.4]";
 		resistanceEast=1;
 		timeOfChanges=1800.0002;
 		startWeather=0.30000001;
