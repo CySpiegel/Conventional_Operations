@@ -115,7 +115,7 @@ _Pos = selectRandom (_Position buildingPos -1);
  {  
  
 					 _chance = selectRandom [1, 1, 1, 2, 2] ;
-					 if (_chance = 1) then {
+					 if (_chance == 1) then {
 					execVM "Scripts\INTL_Civ.sqf"; 
 					 }else{
 					execVM "Scripts\INTL.sqf"; 	
@@ -158,7 +158,7 @@ _Pos = _thisTownTrigger getPos [(5 +(random 10)), (0 + (random 360))];
  {  
  
 					 _chance = selectRandom [1, 1, 1, 2, 2] ;
-					 if (_chance = 1) then {
+					 if (_chance == 1) then {
 					execVM "Scripts\INTL_Civ.sqf"; 
 					 }else{
 					execVM "Scripts\INTL.sqf"; 	

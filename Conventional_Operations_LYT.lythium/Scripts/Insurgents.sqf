@@ -28,7 +28,7 @@ _thisINSURGTrigger = _this select 0;
 					 {},              
 					 {  
 					 _chance = selectRandom [1, 1, 1, 2, 2] ;
-					 if (_chance = 1) then {
+					 if (_chance == 1) then {
 					execVM "Scripts\INTL_Civ.sqf"; 
 					 }else{
 					execVM "Scripts\INTL.sqf"; 	
@@ -96,7 +96,7 @@ _thisINSURGTrigger = _this select 0;
 					 {  
 					 
 					 _chance = selectRandom [1, 1, 1, 2, 2] ;
-					 if (_chance = 1) then {
+					 if (_chance == 1) then {
 					execVM "Scripts\INTL_Civ.sqf"; 
 					 }else{
 					execVM "Scripts\INTL.sqf"; 	
@@ -124,7 +124,7 @@ _thisINSURGTrigger = _this select 0;
 					 {  
 					 
 					 _chance = selectRandom [1, 1, 1, 2, 2] ;
-					 if (_chance = 1) then {
+					 if (_chance == 1) then {
 					execVM "Scripts\INTL_Civ.sqf"; 
 					 }else{
 					execVM "Scripts\INTL.sqf"; 	
@@ -167,10 +167,10 @@ _thisINSURGTrigger = _this select 0;
 					 {  
 					 
 					 _chance = selectRandom [1, 1, 1, 2, 2] ;
-					 if (_chance = 1) then {
-					execVM "Scripts\INTL_Civ.sqf"; 
+					 if (_chance == 1) then {
+					execVM 'Scripts\INTL_Civ.sqf'; 
 					 }else{
-					execVM "Scripts\INTL.sqf"; 	 
+					execVM 'Scripts\INTL.sqf'; 	 
 					 };
 					 
 					 },    
@@ -212,7 +212,7 @@ _thisINSURGTrigger = _this select 0;
 					 {  
 					 
 					 _chance = selectRandom [1, 1, 1, 2, 2] ;
-					 if (_chance = 1) then {
+					 if (_chance == 1) then {
 					execVM "Scripts\INTL_Civ.sqf"; 
 					 }else{
 					execVM "Scripts\INTL.sqf"; 	 
@@ -246,7 +246,7 @@ _thisINSURGTrigger = _this select 0;
 					 {  
 					 
 					 _chance = selectRandom [1, 1, 1, 2, 2] ;
-					 if (_chance = 1) then {
+					 if (_chance == 1) then {
 					execVM "Scripts\INTL_Civ.sqf"; 
 					 }else{
 					execVM "Scripts\INTL.sqf"; 	
@@ -286,10 +286,10 @@ _thisINSURGTrigger = _this select 0;
 					 {  
 					 
 					 _chance = selectRandom [1, 1, 1, 2, 2] ;
-					 if (_chance = 1) then {
-					execVM "Scripts\INTL_Civ.sqf"; 
+					 if (_chance == 1) then {
+					execVM 'Scripts\INTL_Civ.sqf'; 
 					 }else{
-					execVM "Scripts\INTL.sqf"; 	
+					execVM 'Scripts\INTL.sqf'; 	
 						 };				 
 					 },    
 					 {},              
@@ -324,7 +324,7 @@ _thisINSURGTrigger = _this select 0;
 					 {  
 					 
 					 _chance = selectRandom [1, 1, 1, 2, 2] ;
-					 if (_chance = 1) then {
+					 if (_chance == 1) then {
 					execVM "Scripts\INTL_Civ.sqf"; 
 					 }else{
 					execVM "Scripts\INTL.sqf"; 	
@@ -352,7 +352,7 @@ _thisINSURGTrigger = _this select 0;
 					 {  
 					 
 					 _chance = selectRandom [1, 1, 1, 2, 2] ;
-					 if (_chance = 1) then {
+					 if (_chance == 1) then {
 					execVM "Scripts\INTL_Civ.sqf"; 
 					 }else{
 					execVM "Scripts\INTL.sqf"; 	
