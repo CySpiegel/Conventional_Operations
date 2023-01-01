@@ -23,7 +23,6 @@ private _ctrlGroupList = _dialog displayCtrl 758038;
 
 private _grp = KPPLM_groups select (lbCurSel _ctrlGroupList);
 [player] join _grp;
-group player selectLeader player;
 
 // Refresh Dialog with a small delay
 [{player in units (_this select 0)}, {closeDialog 0;}, [_grp]] call CBA_fnc_waitUntilAndExecute;

@@ -31,8 +31,8 @@
 #define KP_HEIGTH_TITLE                 0.035
 #define KP_HEIGTH_BUTTON                0.025
 
-// Colors    0.2,0.6,0.99,1
-#define KP_COLOR_PLAYERDEFINE           {0.2,0.6,0.99,1}
+// Colors
+#define KP_COLOR_PLAYERDEFINE           {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.13])", "(profilenamespace getvariable ['GUI_BCG_RGB_G',0.54])", "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.21])", "(profilenamespace getvariable ['GUI_BCG_RGB_A',0.8])"}
 #define KP_COLOR_BACKGROUND             {0, 0, 0, 0.5}
 
 // Leftovers from the old framework. Will be removed/replaced in further development

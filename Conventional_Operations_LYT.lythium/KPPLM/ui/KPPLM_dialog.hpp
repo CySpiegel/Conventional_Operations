@@ -6,7 +6,7 @@
     Date: 2018-08-03
     Last Update: 2018-11-10
     License: GNU General Public License v3.0 - https://www.gnu.org/licenses/gpl-3.0.html
-KPPLM_groups
+
     Description:
         Provides various functionalities for the players like group management, view distances, etc.
 */
@@ -15,7 +15,7 @@ class KPPLM_dialog {
     idd = 75803;
     movingEnable = 0;
     // Fetch all player groups when opened and free the variable when closed
-    onLoad = "KPPLM_groups = allGroups select {side (leader _x) == west}";
+    onLoad = "KPPLM_groups = allGroups select {isPlayer (leader _x)}";
     onUnload = "KPPLM_groups = nil";
 
     class controlsBackground {
