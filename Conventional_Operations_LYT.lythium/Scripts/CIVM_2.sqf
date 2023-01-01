@@ -51,9 +51,9 @@ deleteMarker _M ;
 
 HCIV = 0;
 
-[] execVM "Scripts\ReputationPlus.sqf";
-[] execVM "Scripts\ReputationPlus.sqf";
-[] execVM "Scripts\ReputationPlus.sqf";
+[] execVM 'Scripts\ReputationPlus.sqf';
+[] execVM 'Scripts\ReputationPlus.sqf';
+[] execVM 'Scripts\ReputationPlus.sqf';
 
 
 } forEach _objectLocGreen; 
