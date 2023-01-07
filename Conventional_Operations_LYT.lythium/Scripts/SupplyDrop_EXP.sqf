@@ -1,4 +1,4 @@
-_Cost= 15;
+_Cost= 35;
 _mrkrs = allMapMarkers select {markerColor _x == "Color2_FD_F"};
 _mrkr = _mrkrs select 0;
 _Money = parseNumber (markerText _mrkr) ;  
@@ -26,14 +26,25 @@ _parachute setPosATL [getPosATL _parachute select 0, getPosATL _parachute select
  _pos = [getPosATL player select 0, getPosATL player select 1, (getPosATL player select 2) + 1000];
 _Cargo = createVehicle ["Box_NATO_AmmoVeh_F", _pos, [], 0, "FLY"]; 
 _Cargo allowDamage false;
-_Cargo addMagazineCargo ["DemoCharge_Remote_Mag", 7];
-_Cargo addMagazineCargo ["APERSBoundingMine_Range_Mag", 7];
-_Cargo addMagazineCargo ["APERSMine_Range_Mag", 7];
-_Cargo addMagazineCargo ["ClaymoreDirectionalMine_Remote_Mag", 7];
-_Cargo addMagazineCargo ["SLAMDirectionalMine_Wire_Mag", 7];
-_Cargo addMagazineCargo ["B_IR_Grenade", 7];
-_Cargo addMagazineCargo ["SmokeShell", 7];
-_Cargo addMagazineCargo ["HandGrenade", 7];
+
+[ _Cargo,
+"<img size=2 color='#FFE258' image='Screens\FOBA\mg_ca.paa'/><t font='PuristaBold' color='#FFE258'>REARM Vehicles",
+"Screens\FOBA\mg_ca.paa",
+"Screens\FOBA\mg_ca.paa",
+	"_this distance _target < 10",			
+	"_caller distance _target < 10",	
+{},
+{},
+{
+[(_this select 0)] execVM "Scripts\REARMVEH.sqf" ;
+},
+{},
+[],
+10,
+1,
+false,
+false
+] remoteExec ["BIS_fnc_holdActionAdd",0,true];   
 
 _Cargo attachTo [_parachute,[0,0,0]];
      

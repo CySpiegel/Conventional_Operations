@@ -6,6 +6,30 @@ MissionLoadedLitterally = 0 ;
         titleText ["B.S.P Group Presents...", "BLACK IN",9999];
 		5 fadeSound 0;
 
+if (isServer) then { 
+
+		FreshStartVal = "FreshStart" call BIS_fnc_getParamValue;
+		 if (FreshStartVal == 1) then { _FS = execVM "Scripts\MissionReset.sqf";   waitUntil { scriptDone _FS }; } ;
+		 
+		ReviveSwitchVal = "ReviveSwitch" call BIS_fnc_getParamValue;
+		 if (ReviveSwitchVal == 1) then { 
+		 _mrkr = createMarker ["Revive_Handle", [0, 0, 0]]; 
+		_mrkr setMarkerType "loc_SafetyZone";
+		_mrkr setMarkerColor "Color1_FD_F";
+		_mrkr setMarkerSize [0.6, 0.6]; 
+		_mrkr setMarkerText "Activate"; 
+		_mrkr setMarkerAlpha 0.005;
+		 } else {
+		 _mrkr = createMarker ["Revive_Handle", [0, 0, 0]]; 
+		_mrkr setMarkerType "loc_SafetyZone";
+		_mrkr setMarkerColor "Color1_FD_F";
+		_mrkr setMarkerSize [0.6, 0.6]; 
+		_mrkr setMarkerText "DeActivate"; 
+		_mrkr setMarkerAlpha 0.005;	 
+		 };
+	};
+
+sleep 5;
  ////////////////////////////////////////////////Mission Loading - Variables // Server & HC
 if ((isServer) && !(didJIP)) then { _Load = execVM "Scripts\MissionLoad.sqf"; waitUntil { scriptDone _Load }; 
 TRG1LOCC = 0;
@@ -34,13 +58,16 @@ AVENGLOCC = 1 ;
 publicVariable "AVENGLOCC";
 };
 
-sleep 5;
+sleep 3;
 
 if !(didJIP) then {
 waitUntil {MissionLoadedLitterally == 1};
 }; 
 
 ////////////////////////////////////////////// //Mission Parameters   // TheCommander ////////////////////////////////////////////////
+
+sleep 3;
+
 if ((count (allMapMarkers select {markerType _x == "loc_SafetyZone"}) != 7) && (player == TheCommander) && (not didJIP)) then { execVM "Scripts\Dialog_Faction.sqf"; };
 waitUntil {(count (allMapMarkers select {markerType _x == "loc_SafetyZone"}) == 7) && (count (allMapMarkers select {markerText _x == "Respawn"}) > 0)};
 
@@ -112,7 +139,7 @@ HC1Present = if ( isNil "HC_1" ) then { False } else {True } ;
 HC2Present = if ( isNil "HC_2" ) then { False } else {True } ; 
 HC3Present = if ( isNil "HC_3" ) then { False } else {True } ; 
 
-waitUntil {(DIALOCC == 1) || (MarLOCC == 1) || (count (allMapMarkers select {markerType _x == "b_installation"}) > 0)};
+waitUntil {(DIALOCC == 1) || (MarLOCC == 1) || (count (allMapMarkers select {markerType _x == "b_installation"}) > 0) || (count (allMapMarkers select {markerType _x == "b_unknown"}) > 0)};
 
 if (!HC1Present && !HC2Present && !HC3Present) then {
 	if  (isServer)  then {
@@ -345,3 +372,22 @@ _triggers = _alltriggers select {triggerInterval _x == 3 && ({(side _x == west) 
 
 ///////////////////////////////////////////////////////////////////////////////////
 if (isClass (configfile >> "CfgVehicles" >> "Box_cTab_items") == true ) then { player addItem "ItemAndroid"; player addItem "ItemcTab"; };
+
+if (isServer) then {
+ AutoSaveSwitchVal = "AutoSaveSwitch" call BIS_fnc_getParamValue;
+ AutoSaveIntervalVal = "AutoSaveInterval" call BIS_fnc_getParamValue;
+
+	if (AutoSaveSwitchVal == 1) then {
+		
+			[] spawn {  
+			while { true } do{  
+
+			execVM "Scripts\MissionSave.sqf" ;
+			execVM "Scripts\MissionSaveGroups.sqf" ;
+
+			sleep AutoSaveIntervalVal;  
+			};  
+			};
+
+	};
+};

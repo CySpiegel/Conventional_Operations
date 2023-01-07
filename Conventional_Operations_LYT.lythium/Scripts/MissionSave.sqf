@@ -1,4 +1,5 @@
- "Saving_Mission_Progress" remoteExec ["hint", 0];	
+
+[[west,"HQ"], "Saving Mission ..."] remoteExec ["sideChat", 0];
 
 
 sleep 5;
@@ -32,7 +33,7 @@ private _MarkerDataName = _missionTag + "_markers";
 
 private _MarkerDataHash = createHashMap;
 
-private _SaveMarks = allMapMarkers select {markerColor _x != "colorCivilian" && markerType _x != "mil_marker_noShadow" && markerType _x != "loc_Bunker" &&  markerShape _x != "RECTANGLE" && markerType _x != "respawn_inf" && markerType _x != "o_unknown" && markerType _x != "mil_warning" && markerType _x != "mil_unknown"} ;
+private _SaveMarks = allMapMarkers select {markerColor _x != "Color1_FD_F" && markerColor _x != "colorCivilian" && markerType _x != "mil_marker_noShadow" && markerType _x != "loc_Bunker" &&  markerShape _x != "RECTANGLE" && markerType _x != "respawn_inf" && markerType _x != "o_unknown" && markerType _x != "mil_warning" && markerType _x != "mil_unknown"} ;
 
 {
 private _MarkerDataHashEach = createHashMap;
@@ -68,7 +69,6 @@ private _VehicleDataHash = createHashMap;
 _VEHs = [] ;
 
 _ALLVEHs = nearestobjects [(position player),[
-"Box_NATO_AmmoVeh_F",
 "B_SAM_System_01_F",
 "B_AAA_System_01_F",
 "B_SAM_System_02_F",
@@ -76,10 +76,6 @@ _ALLVEHs = nearestobjects [(position player),[
 "B_GMG_01_A_F",
 "B_HMG_01_A_F",
 "B_W_Static_Designator_01_F",
-"B_Slingload_01_Fuel_F",
-"B_Slingload_01_Repair_F",
-"B_Slingload_01_Ammo_F",
-"B_Slingload_01_Medevac_F",
 "B_UGV_02_Demining_F",
 "B_UAV_02_lxWS",
 "B_UAV_01_F",
@@ -130,6 +126,9 @@ F_APC_04,
 F_APC_05,
 F_APC_06,
 F_TNK_01,
+F_TNK_02,
+F_TNK_03,
+F_TNK_04,
 F_Art_00,
 F_Art_01,
 F_Art_02,
@@ -145,10 +144,7 @@ F_Plane_02_CAS,
 F_Plane_03,
 F_Plane_04,
 F_Plane_05,
-F_Plane_06,
-F_Wpn_01,
-F_Lnch_01,
-F_Amm_01
+F_Plane_06
 ],40000] ;
 _VEHs append _ALLVEHs ;	
 
@@ -236,9 +232,5 @@ profileNamespace setVariable [_ObjectDataName, _ObjectDataHash];
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+[[west,"HQ"], "Mission Saved !"] remoteExec ["sideChat", 0];
 
-"Mission_Progress_Saved" remoteExec ["hint", 0];	
-
-sleep 5;
-
-"" remoteExec ["hint", 0];	

@@ -87,19 +87,6 @@ class controls
 		font="PuristaBold";
 	};
 
-	class RscFrame_1799: RscText //
-	{
-		idc = 1799;
-		text = "Revive System"; 
-		x = 12 * GUI_GRID_W + GUI_GRID_X;
-		y = 9 * GUI_GRID_H + GUI_GRID_Y;
-		w = 9.5 * GUI_GRID_W;
-		h = 2.5 * GUI_GRID_H;
-		colorText[] = {0.2,0.6,0.99,1};
-		sizeEx = 0.7 * GUI_GRID_H;
-		font="PuristaMedium";
-		tooltip = "";
-	};
 	
 		class RscFrame_1803: RscText //
 	{
@@ -197,12 +184,6 @@ class controls
 		font="PuristaMedium";
 	};
 	
-		class REvive_selection_listbox: suprChooseFactionCombo 		//REvive
-	{
-		idc = 1954;
-		x = 12 * GUI_GRID_W + GUI_GRID_X;
-		y = 11 * GUI_GRID_H + GUI_GRID_Y;
-	};
 	
 	class faction_selection_listbox: suprChooseFactionCombo 		//player
 	{

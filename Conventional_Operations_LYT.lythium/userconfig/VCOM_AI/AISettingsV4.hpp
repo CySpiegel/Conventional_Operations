@@ -15,7 +15,7 @@ VcmAI_ActiveList = []; //Leave this alone.
 VCM_AIMagLimit = 1; //Number of mags remaining before AI looks for ammo.
 VCM_Debug = false; //Enable debug mode.
 VCM_MINECHANCE = 0; //Chance to lay a mine
-VCM_LGARRISONCHANCE = 0; //Chance to perform a temporary garrison. 0 = disabled
+VCM_LGARRISONCHANCE = 0.1; //Chance to perform a temporary garrison. 0 = disabled
 
 
 //VCOM ARTILLERY. Only one kind of advanced artillery can be used at a time.

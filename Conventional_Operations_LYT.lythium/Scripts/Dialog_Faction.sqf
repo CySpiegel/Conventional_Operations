@@ -24,13 +24,6 @@ _civilianbox = findDisplay 999 displayCtrl 1957;
 _randombutton = findDisplay 999 displayCtrl 1600;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
-populateFactionBoxR = {
-
-	_ctrl = findDisplay 999 displayCtrl _this;
-	
-    _ctrl lbAdd "Activate";  
-	_ctrl lbAdd "DeActivate";  
-};
 
 populateFactionBoxF = {
 
@@ -143,8 +136,6 @@ populateFactionBoxSD = {
     _ctrl lbAdd "HARD _ Full Enemy Presence _ progressive";
 };
 
-
-{ _x call populateFactionBoxR } forEach [1954]; 
 
 { _x call populateFactionBoxF } forEach [1955]; 
 

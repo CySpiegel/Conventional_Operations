@@ -1,5 +1,5 @@
- 
- 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  
  _FOBC = nearestObjects [position player, ["B_Slingload_01_Cargo_F"], 40000];
@@ -159,8 +159,68 @@ openMap true;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 [] spawn {  
-  while { sleep 5 ; alive TheCommander } do{  
+  while { true } do{  
+{
+ _x setDamage 0; 
+  _x setVariable ["ais_stabilized", true, true];
+  _x setVariable ["ais_unconscious", false, true];
+
+  _x setVariable ["ais_fireDamage", 0]; 
+ 
+ [_x] remoteExecCall ["AIS_System_fnc_restoreFaks", _x, false]; 
+ 
+  [true] remoteExec ["showHud", _x]; 
+   [true] remoteExecCall ["AIS_Effects_fnc_toggleRadio", _x, false]; 
+ 
+  _x stop false; 
+ _x enableAI "MOVE";    
+ _x enableAI "TARGET"; 
+ _x enableAI "AUTOTARGET"; 
+ _x enableAI "ANIM"; 
+ _x enableAI "AUTOCOMBAT";  
+ 
+ [_x, false] remoteExecCall ["AIS_System_fnc_unconcsiousRemote", 0];  
+ [_x, false] remoteExec ["setCaptive", 0, false]; 
+  
+ ["GetOutMan"] remoteExec ["removeAllEventHandlers", _x, false];
+ 
+	[_x, _x] remoteExec ["ace_medical_treatment_fnc_fullHeal", _x, false]; 
+	
+	
+  } forEach (allUnits select {((side _x == civilian) || (side _x == west)) && (count ( nearestobjects [_x ,["Land_Medevac_house_V1_F", "Land_Medevac_HQ_V1_F", "B_Slingload_01_Medevac_F", "Land_MedicalTent_01_MTP_closed_F", "Land_MedicalTent_01_white_IDAP_med_closed_F"],20]) > 0)}) ; 
+
+ sleep 30;  
+  };  
+};
+
+[] spawn {  
+  while { true } do{  
+{
+  _x setDamage 0; 
+ 	
+	} forEach (vehicles select {(side (driver  _x) == west) && (count ( nearestobjects [_x ,[F_Truck_04, "B_Slingload_01_Repair_F"],50]) > 0)}) ; 
+
+ sleep 30;  
+  };  
+};
+
+[] spawn {  
+  while { true } do{  
+{
+_x setVehicleAmmo 1;
+ 	
+	} forEach (vehicles select {(side (driver  _x) == west) && (count ( nearestobjects [_x ,[F_Truck_03, "B_Slingload_01_Ammo_F", "Box_NATO_AmmoVeh_F"],50]) > 0)}) ; 
+
+ sleep 30;  
+  };  
+};
+
+
+
+[] spawn {  
+  while { true } do{  
 _MOBRESMarks = allMapMarkers select {markerType _x == "b_unknown" && markerColor _x == "ColorYellow" && markerAlpha _x == 0.7};
 	{deleteMarker _x} forEach _MOBRESMarks ;
 _MOBRESVeh = vehicles select {(typeOf _x == F_Truck_05 or typeOf _x == F_Heli_04) && alive _x } ;	
@@ -174,37 +234,114 @@ _mrkr setMarkerSizeLocal [1, 1];
 _mrkr setMarkerAlpha 0.7; 
 } foreach _MOBRESVeh;
 
- sleep 1;  
+ sleep 5;  
   };  
 };
 
 
+
 _MOBSER = nearestobjects [(position player),[F_Truck_04],40000] ;
 {
-[_x, -1, west, "LIGHT"] execVM "R3F_LOG\USER_FUNCT\init_creation_factory.sqf" ;
+	{ [_x, -1, west, "LIGHT"] execVM "R3F_LOG\USER_FUNCT\init_creation_factory.sqf" ; } remoteExec ["call", 0]; 
 
 } forEach _MOBSER ;
 
 _MOBARS = nearestobjects [(position player),[F_Truck_03],40000] ;
 {
+
+[ _x,
+"<img size=2 color='#FFE258' image='Screens\FOBA\mg_ca.paa'/><t font='PuristaBold' color='#FFE258'>ARSENAL",
+"Screens\FOBA\mg_ca.paa",
+"Screens\FOBA\mg_ca.paa",
+	"_this distance _target < 10",			
+	"_caller distance _target < 10",	
+{},
+{},
+{
 	
-[_x,[
-	"<img size=2 color='#FFE258' image='Screens\FOBA\mg_ca.paa'/><t font='PuristaBold' color='#FFE258'>ARSENAL",
-	{["Open", true] spawn BIS_fnc_arsenal;},
-	nil,
-	3,
-	true,
-	true,
-	"",
-	"", // _target, _this, _originalTarget
-	15,
-	false,
-	"",
-	""
-]] remoteExec ["addAction",0,true];
+	if (isClass (configfile >> "ace_arsenal_loadoutsDisplay") == true ) then {
+		[player, player, true] call ace_arsenal_fnc_openBox;
+	} else {
+		["Open", true] spawn BIS_fnc_arsenal;
+	};
+},
+{},
+[],
+1,
+1,
+false,
+false
+] remoteExec ["BIS_fnc_holdActionAdd",0,true];   
+
+[ _x,
+"<img size=2 color='#FFE258' image='Screens\FOBA\mg_ca.paa'/><t font='PuristaBold' color='#FFE258'>REARM Infantry",
+"Screens\FOBA\mg_ca.paa",
+"Screens\FOBA\mg_ca.paa",
+	"_this distance _target < 10",			
+	"_caller distance _target < 10",	
+{},
+{},
+{
+[(_this select 0)] execVM "Scripts\REARM.sqf" ;
+},
+{},
+[],
+5,
+1,
+false,
+false
+] remoteExec ["BIS_fnc_holdActionAdd",0,true];   
 
 } forEach _MOBARS ;
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+_SUPPARS = nearestobjects [(position player),["B_CargoNet_01_ammo_F"],40000] ;
+{
+
+[ _x,
+"<img size=2 color='#FFE258' image='Screens\FOBA\mg_ca.paa'/><t font='PuristaBold' color='#FFE258'>ARSENAL",
+"Screens\FOBA\mg_ca.paa",
+"Screens\FOBA\mg_ca.paa",
+	"_this distance _target < 10",			
+	"_caller distance _target < 10",	
+{},
+{},
+{
+	
+	if (isClass (configfile >> "ace_arsenal_loadoutsDisplay") == true ) then {
+		[player, player, true] call ace_arsenal_fnc_openBox;
+	} else {
+		["Open", true] spawn BIS_fnc_arsenal;
+	};
+},
+{},
+[],
+1,
+1,
+false,
+false
+] remoteExec ["BIS_fnc_holdActionAdd",0,true];   
+
+[ _x,
+"<img size=2 color='#FFE258' image='Screens\FOBA\mg_ca.paa'/><t font='PuristaBold' color='#FFE258'>REARM Infantry",
+"Screens\FOBA\mg_ca.paa",
+"Screens\FOBA\mg_ca.paa",
+	"_this distance _target < 10",			
+	"_caller distance _target < 10",	
+{},
+{},
+{
+[(_this select 0)] execVM "Scripts\REARM.sqf" ;
+},
+{},
+[],
+5,
+1,
+false,
+false
+] remoteExec ["BIS_fnc_holdActionAdd",0,true];   
+
+} forEach _SUPPARS ;
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 _VEHs = nearestobjects [(position player),[

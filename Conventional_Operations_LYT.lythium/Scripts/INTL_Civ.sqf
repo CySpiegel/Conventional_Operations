@@ -14,13 +14,13 @@ if (_chance23 > 1) then {
 							_mrkr setMarkerSize [0.8, 0.8];
 							_mrkr setMarkerAlpha 0.6;
 							
-							openMap true;
-							[markerSize _mrkr, markerPos _mrkr, 1] call BIS_fnc_zoomOnArea;
-							sleep 1;
-							[parseText "<t color='#FACE00' font='PuristaBold' align = 'right' shadow = '1' size='3'>+ NEW INTEL</t><br /><t color='#7c7c7c' align = 'right' shadow = '1' size='1.5'>Civilian Intel Received </t>", [0, 0.5, 1, 1], nil, 5, 1.7, 0] remoteExec ["BIS_fnc_textTiles", 0];
+								sleep 1;
+								[parseText "<t color='#FACE00' font='PuristaBold' align = 'right' shadow = '1' size='3'>+ NEW INTEL</t><br /><t  align = 'right' shadow = '1' size='1.5'>Civilian Intel Received </t>", [0, 0.5, 1, 1], nil, 5, 1.7, 0] remoteExec ["BIS_fnc_textTiles", 0];
+									_attackingAtGrid = mapGridPosition getMarkerPos _mrkr;
+								[[west,"HQ"], "Enemy Presence Confirmed at grid " + _attackingAtGrid] remoteExec ["sideChat", 0];
 			}else{
 
-							_INTL = allMapMarkers select { (markerAlpha _x == 0.001 or markerAlpha _x == 0) && markerColor _x == "colorOPFOR" && markerType _x == "o_unknown"};
+							_INTL = allMapMarkers select { (markerAlpha _x == 0.001 or markerAlpha _x == 0) && markerColor _x == "colorOPFOR" && markerType _x == "o_unknown" && markerType _x != "o_inf"};
 							_x = selectRandom _INTL;
 
 							_pos = (getMarkerpos _x) getPos [(5 + (random 15)),(0 + (random 350))] ; 
@@ -30,15 +30,15 @@ if (_chance23 > 1) then {
 							_mrkr setMarkerSize [0.8, 0.8];
 							_mrkr setMarkerAlpha 0.6;
 
-							openMap true;
-							 [markerSize _mrkr, markerPos _mrkr, 1] call BIS_fnc_zoomOnArea;
-							sleep 1;
-							[parseText "<t color='#FACE00' font='PuristaBold' align = 'right' shadow = '1' size='3'>+ NEW INTEL</t><br /><t color='#7c7c7c' align = 'right' shadow = '1' size='1.5'>Civilian Intel Received </t>", [0, 0.5, 1, 1], nil, 5, 1.7, 0] remoteExec ["BIS_fnc_textTiles", 0];
+								sleep 1;
+								[parseText "<t color='#FACE00' font='PuristaBold' align = 'right' shadow = '1' size='3'>+ NEW INTEL</t><br /><t  align = 'right' shadow = '1' size='1.5'>Civilian Intel Received </t>", [0, 0.5, 1, 1], nil, 5, 1.7, 0] remoteExec ["BIS_fnc_textTiles", 0];
+									_attackingAtGrid = mapGridPosition getMarkerPos _mrkr;
+								[[west,"HQ"], "Enemy Presence Confirmed at grid " + _attackingAtGrid] remoteExec ["sideChat", 0];
 			};
 
 	}else{
 
-					_INTL = allMapMarkers select { (markerAlpha _x == 0.001 or markerAlpha _x == 0) && markerColor _x == "colorOPFOR" && markerType _x == "o_unknown"};
+					_INTL = allMapMarkers select { (markerAlpha _x == 0.001 or markerAlpha _x == 0) && markerColor _x == "colorOPFOR" && markerType _x == "o_unknown" && markerType _x != "o_inf"};
 					_x = selectRandom _INTL;
 
 					_pos = (getMarkerpos _x) getPos [(5 + (random 15)),(0 + (random 350))] ; 
@@ -48,10 +48,10 @@ if (_chance23 > 1) then {
 					_mrkr setMarkerSize [0.8, 0.8];
 					_mrkr setMarkerAlpha 0.6;
 
-					openMap true;
-					 [markerSize _mrkr, markerPos _mrkr, 1] call BIS_fnc_zoomOnArea;
-					sleep 1;
-					[parseText "<t color='#FACE00' font='PuristaBold' align = 'right' shadow = '1' size='3'>+ NEW INTEL</t><br /><t color='#7c7c7c' align = 'right' shadow = '1' size='1.5'>Civilian Intel Received </t>", [0, 0.5, 1, 1], nil, 5, 1.7, 0] remoteExec ["BIS_fnc_textTiles", 0];
+								sleep 1;
+								[parseText "<t color='#FACE00' font='PuristaBold' align = 'right' shadow = '1' size='3'>+ NEW INTEL</t><br /><t  align = 'right' shadow = '1' size='1.5'>Civilian Intel Received </t>", [0, 0.5, 1, 1], nil, 5, 1.7, 0] remoteExec ["BIS_fnc_textTiles", 0];
+									_attackingAtGrid = mapGridPosition getMarkerPos _mrkr;
+								[[west,"HQ"], "Enemy Presence Confirmed at grid " + _attackingAtGrid] remoteExec ["sideChat", 0];
 	};
 	
 	

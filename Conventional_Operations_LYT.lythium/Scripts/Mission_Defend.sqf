@@ -47,10 +47,8 @@ ENMASSMAINmarkerName setMarkerAlpha 0.5 ;
 
 [parseText "<t color='#FF3619' font='PuristaBold' align = 'right' shadow = '1' size='3'>! WARNING !</t><br /><t  align = 'right' shadow = '1' size='1.6'>Intel Suggests There is a Large Enemy Combined Group </t><br /><t  align = 'right' shadow = '1' size='1.3'> Planning a Major Assault on this Location, ETA 10 Minutes</t><br /><t  align = 'right' shadow = '1' size='1.3'>Secure the Perimeter and Get Ready,</t><br /><t  align = 'right' shadow = '1' size='1.3'>Prepare for a Major Defensive, ETA 10 Mike</t>", [0, 0.5, 1, 1], nil, 13, 1.7, 0] remoteExec ["BIS_fnc_textTiles", 0];
 
-sleep 1.5 ;
 
- {openMap true; } remoteExec ["call", 0]; 
- [markerSize ENMASSMAINmarkerName, markerPos ENMASSMAINmarkerName, 1 ] remoteExecCall ["BIS_fnc_zoomOnArea" , 0] ;
+sleep 1.5 ;
 
 
 
@@ -59,6 +57,8 @@ sleep 600 ;
 
 
 [parseText "<t color='#FF3619' font='PuristaBold' align = 'right' shadow = '1' size='3'>! WARNING !</t><br /><t  align = 'right' shadow = '1' size='1.3'>Reports Confirms Enemy Forces are Mobilizing,</t><br /><t  align = 'right' shadow = '1' size='1.3'> GET READY GENTLEMEN!</t>", [0, 0.5, 1, 1], nil, 13, 1.7, 0] remoteExec ["BIS_fnc_textTiles", 0];
+_attackingAtGrid = mapGridPosition getMarkerPos ENMASSMAINmarkerName;
+[[west,"HQ"], "Friendly Location Under Enemy attack at grid " + _attackingAtGrid] remoteExec ["sideChat", 0];
 
 
 playMusic "LeadTrack05_F_Tank";

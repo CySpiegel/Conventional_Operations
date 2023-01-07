@@ -415,7 +415,7 @@ _mrkr setMarkerAlpha 0.001;
 sleep 2;
 
 _AllMarks = allMapMarkers select {markerType _x == "o_support" or markerType _x == "n_support" or markerType _x == "o_installation" or markerType _x == "n_installation" or markerType _x == "o_unknown" or markerType _x == "o_antiair" or markerType _x == "o_armor" or markerType _x == "o_service" or markerType _x == "o_plane" or markerType _x == "loc_Transmitter" or markerType _x == "o_maint" or markerType _x == "loc_mine" or markerType _x == "loc_Power" or markerType _x == "loc_Ruin" or markerType _x == "mil_unknown" or markerType _x == "mil_warning" or markerType _x == "o_naval" or markerType _x == "o_recon" };     
-_AllMarksNear = _AllMarks select {getPos TheCommander distance getMarkerpos _x < 3000};
+_AllMarksNear = _AllMarks select {getPos TheCommander distance getMarkerpos _x < 2000};
 	{  
 deleteMarker _x ; 
 	} forEach _AllMarksNear;

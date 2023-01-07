@@ -6,7 +6,7 @@ ctrlDelete (findDisplay 999 displayCtrl 1956)  ;
 
 (findDisplay 999) closeDisplay 1;
 
-_Revivebox = findDisplay 999 displayCtrl 1954;
+
 _playerbox = findDisplay 999 displayCtrl 1955;
 _enemybox = findDisplay 999 displayCtrl 1956;
 _civilianbox = findDisplay 999 displayCtrl 1957;
@@ -14,7 +14,7 @@ _Presencebox = findDisplay 999 displayCtrl 1958;
 _Resourcesbox = findDisplay 999 displayCtrl 1959;
 _Reputationbox = findDisplay 999 displayCtrl 1960;
 _Difficultybox = findDisplay 999 displayCtrl 1961;
-ReviveBoxName = _Revivebox lbText lbCurSel _Revivebox;
+
 PlayerfactionName = _playerbox lbText lbCurSel _playerbox;
 EnemyfactionName = _enemybox lbText lbCurSel _enemybox;
 CivilianfactionName = _civilianbox lbText lbCurSel _civilianbox;
@@ -23,7 +23,7 @@ ResourcesName = _Resourcesbox lbText lbCurSel _Resourcesbox;
 ReputationName = _Reputationbox lbText lbCurSel _Reputationbox;
 DifficultyName = _Difficultybox lbText lbCurSel _Difficultybox;
 
-if ((PlayerfactionName == "") or (EnemyfactionName == "") or (CivilianfactionName == "") or (ReviveBoxName == "") or (PresenceName == "") or (ResourcesName == "") or (ReputationName == "") or (DifficultyName == "")) then {execVM "Scripts\Dialog_Faction.sqf";} else {
+if ((PlayerfactionName == "") or (EnemyfactionName == "") or (CivilianfactionName == "") or (PresenceName == "") or (ResourcesName == "") or (ReputationName == "") or (DifficultyName == "")) then {execVM "Scripts\Dialog_Faction.sqf";} else {
 
 hint "Done";
 
@@ -55,12 +55,6 @@ _mrkr setMarkerText ResourcesName;
 _mrkr setMarkerAlpha 0.005;
 
 
-_mrkr = createMarker ["Revive_Handle", [0, 0, 0]]; 
-_mrkr setMarkerType "loc_SafetyZone";
-_mrkr setMarkerColor "Color1_FD_F";
-_mrkr setMarkerSize [0.6, 0.6]; 
-_mrkr setMarkerText ReviveBoxName; 
-_mrkr setMarkerAlpha 0.005;
 
 
 _mrkr = createMarker ["Friendly_Handle", [0, 0, 0]]; 

@@ -7,23 +7,29 @@ _FOBB = nearestObjects [position player, ["Land_Cargo_House_V1_F", "Land_Cargo_H
 
 { null = [_x, -1, west, "LIGHT"] execVM "R3F_LOG\USER_FUNCT\init_creation_factory.sqf" } remoteExec ["call", 0]; 
 
-if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {[_x, true] remoteExec ["ace_arsenal_fnc_initBox", 0];} ;
-
-
-[_x,[
-	"<img size=2 color='#FFE258' image='Screens\FOBA\mg_ca.paa'/><t font='PuristaBold' color='#FFE258'>ARSENAL",
-	{["Open", true] spawn BIS_fnc_arsenal;},
-	nil,
-	3,
-	true,
-	true,
-	"",
-	"", // _target, _this, _originalTarget
-	15,
-	false,
-	"",
-	""
-]] remoteExec ["addAction",0,true];
+[ _x,
+"<img size=2 color='#FFE258' image='Screens\FOBA\mg_ca.paa'/><t font='PuristaBold' color='#FFE258'>ARSENAL",
+"Screens\FOBA\mg_ca.paa",
+"Screens\FOBA\mg_ca.paa",
+	"_this distance _target < 10",			
+	"_caller distance _target < 10",	
+{},
+{},
+{
+	
+	if (isClass (configfile >> "ace_arsenal_loadoutsDisplay") == true ) then {
+		[player, player, true] call ace_arsenal_fnc_openBox;
+	} else {
+		["Open", true] spawn BIS_fnc_arsenal;
+	};
+},
+{},
+[],
+1,
+1,
+false,
+false
+] remoteExec ["BIS_fnc_holdActionAdd",0,true];   
 
 
 

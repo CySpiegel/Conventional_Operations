@@ -41,13 +41,9 @@ private _ctrlValueSound = _dialog displayCtrl 7580316;
 private _ctrlSliderSound = _dialog displayCtrl 7580317;
 
 // Display KP Ranks data or hide the player menu entries for the data
-if (KPPLM_KPR) then {
+
     [] call KPPLM_fnc_showRankData;
-} else {
-    {
-        _x ctrlShow false;
-    } forEach [_ctrlLabelRank, _ctrlRank, _ctrlLabelScore, _ctrlScore, _ctrlLabelPlaytime, _ctrlPlaytime];
-};
+
 
 // Fill group list with all groups leaded by players
 {
@@ -60,9 +56,9 @@ if (KPPLM_KPR) then {
 } forEach KPPLM_groups;
 
 // Set initial values for view distances
-_ctrlViewFoot ctrlSetText str KPPLM_viewFoot;
-_ctrlViewVeh ctrlSetText str KPPLM_viewVeh;
-_ctrlViewAir ctrlSetText str KPPLM_viewAir;
+_ctrlViewFoot ctrlSetText str 1000;
+_ctrlViewVeh ctrlSetText str 2000;
+_ctrlViewAir ctrlSetText str 3000;
 
 // Fill density, auto tpv and radio dropdowns. Also preselect the saved values
 _ctrlTerrain lbAdd localize "STR_KPPLM_TERRAINLOW"; // 50

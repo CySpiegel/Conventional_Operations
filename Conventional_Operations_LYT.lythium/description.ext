@@ -121,7 +121,55 @@ class CfgCommunicationMenu
 	};
 };
 
-
+class Params
+{
+	
+		class ReviveSwitch
+	{
+		title = "Revive Switch";
+		texts[] = { "Activate", "DeActivate"};
+		values[] = { 1, 0};
+		default = 1;
+		isGlobal = 1;
+	};
+	
+	class MusicSwitch
+	{
+		title = "Music Switch";
+		texts[] = { "Activate", "DeActivate"};
+		values[] = { 1, 0};
+		default = 1;
+		isGlobal = 1;
+	};
+	
+	class AutoSaveSwitch
+	{
+		title = "AutoSave Switch";
+		texts[] = { "Activate", "DeActivate"};
+		values[] = { 1, 0};
+		default = 1;
+		isGlobal = 1;
+	};
+	
+	class AutoSaveInterval
+	{
+		title = "AutoSave Interval";
+		texts[] = { "5 Minuties", "10 Minuties", "20 Minuties"};		
+		values[] = { 300, 600, 1200 };
+		default = 300;
+		isGlobal = 1;
+	};
+	
+	class FreshStart
+	{
+		title = "Mission Save Mangament";
+		texts[] = { "Keep Mission Progress", "Delete Mission Progress"};		
+		values[] = { 0, 1 };
+		default = 0;
+		isGlobal = 1;
+	};	
+	
+};
 
 class CfgHints
 {

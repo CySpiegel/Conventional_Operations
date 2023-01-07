@@ -18,8 +18,10 @@ _M = [_MMarks,  _CAST] call BIS_fnc_nearestPosition;
 if ((markerAlpha _M == 0.001) or (markerAlpha _M == 0)) then {
 _M setMarkerAlpha 1;  
 [parseText ""<t color='#FACE00' font='PuristaBold' align = 'right' shadow = '1' size='3'>+ NEW INTEL</t><br /><t t color='#959393' align = 'right' shadow = '1' size='1.5'>Scout Intel Recived </t>"", [0, 0.5, 1, 1], nil, 5, 1.7, 0] remoteExec [""BIS_fnc_textTiles"", 0];
-   openMap true;
-[markerSize _M, markerPos _M, 1] call BIS_fnc_zoomOnArea; };
+
+	_attackingAtGrid = mapGridPosition getMarkerPos _M;
+	[[west,'HQ'],'Enemy Presence Confirmed at grid' + _attackingAtGrid] remoteExec ['sideChat', 0];
+};
 
 ", ""];
 

@@ -1,4 +1,5 @@
 
+
 _missionTag = missionName;
 _missionTag = [_missionTag] call BIS_fnc_filterString;
 
@@ -6,6 +7,7 @@ private _MarkerDataName = _missionTag + "_markers";
 private _VehicleDataName = _missionTag + "_Vehicles";
 private _ObjectDataName = _missionTag + "_Objects";
 private _MarkerTimeName = _missionTag + "_Time";
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -80,15 +82,7 @@ for "_x" from 0 to _CrewSelCnt do { _unit = _Group createunit [_crewType,[0,0,0]
 
 } forEach _allVehNames ; 
 
-_VEHs = nearestobjects [(position player),[
-F_Heli_01,
-F_Heli_02,
-F_Heli_03,
-F_Heli_04,
-F_Heli_05
-],40000] ;
 
-{(group (driver _x)) setVariable ["Vcm_Disable",true]; } forEach _VEHs ; 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 sleep 2 ;
 

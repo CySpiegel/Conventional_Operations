@@ -170,7 +170,7 @@ _thisINSURGTrigger = _this select 0;
 					 if (_chance == 1) then {
 					execVM 'Scripts\INTL_Civ.sqf'; 
 					 }else{
-					execVM 'Scripts\INTL.sqf'; 	 
+					execVM 'Scripts\INTL.sqf'; 	
 					 };
 					 
 					 },    
@@ -249,7 +249,7 @@ _thisINSURGTrigger = _this select 0;
 					 if (_chance == 1) then {
 					execVM "Scripts\INTL_Civ.sqf"; 
 					 }else{
-					execVM "Scripts\INTL.sqf"; 	
+					execVM "Scripts\INTL.sqf"; 	 
 					 };					 
 					 },    
 					 {},              
@@ -327,7 +327,7 @@ _thisINSURGTrigger = _this select 0;
 					 if (_chance == 1) then {
 					execVM "Scripts\INTL_Civ.sqf"; 
 					 }else{
-					execVM "Scripts\INTL.sqf"; 	
+					execVM "Scripts\INTL.sqf"; 	 
 					 };					 
 					 },    
 					 {},              
@@ -355,7 +355,7 @@ _thisINSURGTrigger = _this select 0;
 					 if (_chance == 1) then {
 					execVM "Scripts\INTL_Civ.sqf"; 
 					 }else{
-					execVM "Scripts\INTL.sqf"; 	
+					execVM "Scripts\INTL.sqf"; 	 
 					 };					 
 					 },    
 					 {},              

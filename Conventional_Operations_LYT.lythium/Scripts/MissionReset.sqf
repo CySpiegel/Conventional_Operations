@@ -1,4 +1,5 @@
-   "_Resetting_Mission_Progress_" remoteExec ["hint", 0];	
+[[west,"HQ"], "Resetting Mission ..."] remoteExec ["sideChat", 0];
+
 
 _missionTag = missionName;
 _missionTag = [_missionTag] call BIS_fnc_filterString;
@@ -17,7 +18,8 @@ profileNamespace setVariable [_ObjectDataName, nil];
 
 
 sleep 5;
-"Mission_Progress_Reset" remoteExec ["hint", 0];	
+[[west,"HQ"], "Mission Reset !"] remoteExec ["sideChat", 0];
+
 
 sleep 5;
 "" remoteExec ["hint", 0];	

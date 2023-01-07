@@ -33,7 +33,7 @@ _M = [_MMarks, (_this select 0)] call BIS_fnc_nearestPosition;
 
 deleteMarker _M ; 
   
-  				[50, "ARMOR PATROL"] execVM "Scripts\NOtification.sqf" ;
+  				[50, "AROMR PATROL"] execVM "Scripts\NOtification.sqf" ;
 
 
 [50] execVM "Scripts\Reward.sqf";

@@ -88,6 +88,9 @@ F_APC_05 = "B_AFV_Wheeled_01_up_cannon_F";
 F_APC_06 = "";
 
 F_TNK_01= "B_MBT_01_TUSK_F";
+F_TNK_02= "";
+F_TNK_03= "";
+F_TNK_04= "";
 
 F_Art_00 = "B_Mortar_01_F";
 F_Art_01 = "B_MBT_01_arty_F";
@@ -109,9 +112,6 @@ F_Plane_04 = "B_T_VTOL_01_vehicle_F";
 F_Plane_05 = "B_T_VTOL_01_armed_F";
 F_Plane_06 = "";
 
-F_Wpn_01= "Box_NATO_WpsSpecial_F";
-F_Lnch_01= "Box_NATO_WpsLaunch_F";
-F_Amm_01= "Box_NATO_Ammo_F";
 };
 
 if (markerText "Friendly_Handle" == "NATO Forces _ Desert _ Western Sahara") then {
@@ -201,6 +201,9 @@ F_APC_05 = "B_D_APC_Wheeled_01_atgm_lxWS";
 F_APC_06 = "B_D_APC_Tracked_01_aa_lxWS";
 
 F_TNK_01= "B_D_MBT_01_TUSK_lxWS";
+F_TNK_02= "";
+F_TNK_03= "";
+F_TNK_04= "";
 
 F_Art_00 = "B_Mortar_01_F";
 F_Art_01 = "B_MBT_01_arty_F";
@@ -222,9 +225,6 @@ F_Plane_04 = "B_T_VTOL_01_vehicle_F";
 F_Plane_05 = "B_T_VTOL_01_armed_F";
 F_Plane_06 = "";
 
-F_Wpn_01= "Box_NATO_WpsSpecial_F";
-F_Lnch_01= "Box_NATO_WpsLaunch_F";
-F_Amm_01= "Box_NATO_Ammo_F";
 };
 
 if (markerText "Friendly_Handle" == "NATO Forces _ Woodland") then {
@@ -314,6 +314,9 @@ F_APC_05 = "B_T_AFV_Wheeled_01_up_cannon_F";
 F_APC_06 = "";
 
 F_TNK_01= "B_T_MBT_01_TUSK_F";
+F_TNK_02= "";
+F_TNK_03= "";
+F_TNK_04= "";
 
 F_Art_00 = "B_T_Mortar_01_F";
 F_Art_01 = "B_T_MBT_01_arty_F";
@@ -335,10 +338,6 @@ F_Plane_03 = "B_T_VTOL_01_infantry_F";
 F_Plane_04 = "B_T_VTOL_01_vehicle_F";
 F_Plane_05 = "B_T_VTOL_01_armed_F";
 F_Plane_06 = "";
-
-F_Wpn_01= "Box_T_NATO_WpsSpecial_F";
-F_Lnch_01= "Box_NATO_WpsLaunch_F";
-F_Amm_01= "Box_NATO_Ammo_F";
 
 };
 
@@ -436,6 +435,9 @@ F_APC_05 = "RHS_M6";
 F_APC_06 = "RHS_M2A3_BUSKIII";
 
 F_TNK_01= "rhsusf_m1a2sep1tuskiid_usarmy";
+F_TNK_02= "rhsusf_m1a2sep1tuskid_usarmy";
+F_TNK_03= "rhsusf_m1a2sep2d_usarmy";
+F_TNK_04= "";
 
 F_Art_00 = "B_Mortar_01_F";
 F_Art_01 = "B_MBT_01_arty_F";
@@ -457,9 +459,6 @@ F_Plane_04 = "RHS_C130J_Cargo";
 F_Plane_05 = "B_T_VTOL_01_infantry_F";
 F_Plane_06 = "B_T_VTOL_01_vehicle_F";
 
-F_Wpn_01= "rhsusf_weapon_crate";
-F_Lnch_01= "rhsusf_launcher_crate";
-F_Amm_01= "rhsusf_mags_crate";
 };
 
 if ((markerText "Friendly_Handle" == "United States Armed Forces _ Woodland _ CUP + RHS") or (markerText "Friendly_Handle" == "United States Armed Forces _ Woodland _ RHS")) then {
@@ -550,6 +549,9 @@ F_APC_05 = "RHS_M6_wd";
 F_APC_06 = "RHS_M2A3_BUSKIII_wd";
 
 F_TNK_01= "rhsusf_m1a2sep1tuskiiwd_usarmy";
+F_TNK_02= "rhsusf_m1a2sep1tuskiwd_usarmy";
+F_TNK_03= "rhsusf_m1a2sep2wd_usarmy";
+F_TNK_04= "";
 
 F_Art_00 = "B_T_Mortar_01_F";
 F_Art_01 = "B_T_MBT_01_arty_F";
@@ -570,10 +572,6 @@ F_Plane_03 = "RHS_C130J";
 F_Plane_04 = "RHS_C130J_Cargo";
 F_Plane_05 = "B_T_VTOL_01_infantry_F";
 F_Plane_06 = "B_T_VTOL_01_vehicle_F";
-
-F_Wpn_01= "rhsusf_weapon_crate";
-F_Lnch_01= "rhsusf_launcher_crate";
-F_Amm_01= "rhsusf_mags_crate";
 
 };
 
@@ -668,6 +666,9 @@ F_APC_05 = "";
 F_APC_06 = "";
 
 F_TNK_01= "BWA3_Leopard2_Tropen";
+F_TNK_02= "";
+F_TNK_03= "";
+F_TNK_04= "";
 
 F_Art_00 = "B_Mortar_01_F";
 F_Art_01 = "B_MBT_01_arty_F";
@@ -689,9 +690,6 @@ F_Plane_04 = "B_T_VTOL_01_vehicle_F";
 F_Plane_05 = "B_T_VTOL_01_armed_F";
 F_Plane_06 = "";
 
-F_Wpn_01= "BWA3_Box_SpecialWeapons";
-F_Lnch_01= "BWA3_Box_Launchers";
-F_Amm_01= "BWA3_Box_Ammo";
 };
 
  if (markerText "Friendly_Handle" == "German Armed Forces _ Woodland _ BW") then {
@@ -783,6 +781,9 @@ F_APC_05 = "";
 F_APC_06 = "";
 
 F_TNK_01= "BWA3_Leopard2_Fleck";
+F_TNK_02= "";
+F_TNK_03= "";
+F_TNK_04= "";
 
 F_Art_00 = "B_T_Mortar_01_F";
 F_Art_01 = "B_T_MBT_01_arty_F";
@@ -804,10 +805,6 @@ F_Plane_03 = "B_T_VTOL_01_infantry_F";
 F_Plane_04 = "B_T_VTOL_01_vehicle_F";
 F_Plane_05 = "B_T_VTOL_01_armed_F";
 F_Plane_06 = "";
-
-F_Wpn_01= "BWA3_Box_SpecialWeapons";
-F_Lnch_01= "BWA3_Box_Launchers";
-F_Amm_01= "BWA3_Box_Ammo";
 
 };
 
@@ -901,6 +898,9 @@ F_APC_05 = "ffaa_et_pizarro_mauser";
 F_APC_06 = "";
 
 F_TNK_01= "ffaa_et_leopardo";
+F_TNK_02= "";
+F_TNK_03= "";
+F_TNK_04= "";
 
 F_Art_00 = "B_T_Mortar_01_F";
 F_Art_01 = "B_T_MBT_01_arty_F";
@@ -922,9 +922,6 @@ F_Plane_04 = "ffaa_ea_hercules_cargo";
 F_Plane_05 = "";
 F_Plane_06 = "";
 
-F_Wpn_01= "Box_FFAA_WpsSpecial_F";
-F_Lnch_01= "Box_FFAA_WpsLaunch_F";
-F_Amm_01= "Box_FFAA_Ammo_F";
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1006,7 +1003,10 @@ F_APC_04 = "";
 F_APC_05 = "";
 F_APC_06 = "";
 
-F_TNK_01= "";
+F_TNK_01= "B_MBT_01_TUSK_F";
+F_TNK_02= "";
+F_TNK_03= "";
+F_TNK_04= "";
 
 F_Art_00 = "B_Mortar_01_F";
 F_Art_01 = "B_MBT_01_arty_F";
@@ -1028,9 +1028,6 @@ F_Plane_04 = "B_A_VTOL_01_vehicle_F";
 F_Plane_05 = "";
 F_Plane_06 = "";
 
-F_Wpn_01= "Box_A_NATO_WpsSpecial_F";
-F_Lnch_01= "Box_NATO_WpsLaunch_F";
-F_Amm_01= "Box_A_NATO_Ammo_F";
 };
 
 if (markerText "Friendly_Handle" == "British Armed Forces _ Woodland _ AEW") then {
@@ -1111,7 +1108,10 @@ F_APC_04 = "";
 F_APC_05 = "";
 F_APC_06 = "";
 
-F_TNK_01= "";
+F_TNK_01= "B_T_MBT_01_TUSK_F";
+F_TNK_02= "";
+F_TNK_03= "";
+F_TNK_04= "";
 
 F_Art_00 = "B_T_Mortar_01_F";
 F_Art_01 = "B_T_MBT_01_arty_F";
@@ -1132,10 +1132,6 @@ F_Plane_03 = "B_A_VTOL_01_infantry_F";
 F_Plane_04 = "B_A_VTOL_01_vehicle_F";
 F_Plane_05 = "";
 F_Plane_06 = "";
-
-F_Wpn_01= "Box_A_NATO_WpsSpecial_F";
-F_Lnch_01= "Box_NATO_WpsLaunch_F";
-F_Amm_01= "Box_A_NATO_Ammo_F";
 
 };
 	
@@ -1220,6 +1216,9 @@ F_APC_05 = "Atlas_B_G_LT_01_AA_F";
 F_APC_06 = "";
 
 F_TNK_01= "Atlas_B_G_MBT_03_cannon_F";
+F_TNK_02= "";
+F_TNK_03= "";
+F_TNK_04= "";
 
 F_Art_00 = "B_T_Mortar_01_F";
 F_Art_01 = "B_T_MBT_01_arty_F";
@@ -1241,9 +1240,6 @@ F_Plane_04 = "";
 F_Plane_05 = "";
 F_Plane_06 = "";
 
-F_Wpn_01= "Box_T_NATO_WpsSpecial_F";
-F_Lnch_01= "Box_NATO_WpsLaunch_F";
-F_Amm_01= "Box_NATO_Ammo_F";
 
 };
 	
@@ -1328,6 +1324,9 @@ F_APC_05 = "";
 F_APC_06 = "";
 
 F_TNK_01= "Atlas_I_I_MBT_01_cannon_F";
+F_TNK_02= "";
+F_TNK_03= "";
+F_TNK_04= "";
 
 F_Art_00 = "B_T_Mortar_01_F";
 F_Art_01 = "B_T_MBT_01_arty_F";
@@ -1348,10 +1347,6 @@ F_Plane_03 = "Atlas_I_I_VTOL_01_infantry_F";
 F_Plane_04 = "";
 F_Plane_05 = "";
 F_Plane_06 = "";
-
-F_Wpn_01= "Box_IND_WpsSpecial_F";
-F_Lnch_01= "Box_IND_WpsLaunch_F";
-F_Amm_01= "Box_IND_Ammo_F";
 
 };
 	
@@ -1437,7 +1432,10 @@ F_APC_04 = "";
 F_APC_05 = "";
 F_APC_06 = "";
 
-F_TNK_01= "";
+F_TNK_01= "B_T_MBT_01_TUSK_F";
+F_TNK_02= "";
+F_TNK_03= "";
+F_TNK_04= "";
 
 F_Art_00 = "B_T_Mortar_01_F";
 F_Art_01 = "B_T_MBT_01_arty_F";
@@ -1458,10 +1456,6 @@ F_Plane_03 = "";
 F_Plane_04 = "";
 F_Plane_05 = "";
 F_Plane_06 = "";
-
-F_Wpn_01= "Box_EAF_WpsSpecial_F";
-F_Lnch_01= "Box_EAF_WpsLaunch_F";
-F_Amm_01= "Box_EAF_Ammo_F";
 
 };
 
@@ -1543,6 +1537,9 @@ F_APC_05 = "B_AFV_Wheeled_01_up_cannon_F";
 F_APC_06 = "";
 
 F_TNK_01= "B_MBT_01_TUSK_F";
+F_TNK_02= "";
+F_TNK_03= "";
+F_TNK_04= "";
 
 F_Art_00 = "B_Mortar_01_F";
 F_Art_01 = "B_MBT_01_arty_F";
@@ -1564,9 +1561,6 @@ F_Plane_04 = "B_T_VTOL_01_vehicle_F";
 F_Plane_05 = "B_T_VTOL_01_armed_F";
 F_Plane_06 = "";
 
-F_Wpn_01= "Box_NATO_WpsSpecial_F";
-F_Lnch_01= "Box_NATO_WpsLaunch_F";
-F_Amm_01= "Box_NATO_Ammo_F";
 };
 
 if (markerText "Friendly_Handle" == "United States Armed Forces _ Woodland _ AEW") then {
@@ -1648,6 +1642,9 @@ F_APC_05 = "B_T_AFV_Wheeled_01_up_cannon_F";
 F_APC_06 = "";
 
 F_TNK_01= "B_T_MBT_01_TUSK_F";
+F_TNK_02= "";
+F_TNK_03= "";
+F_TNK_04= "";
 
 F_Art_00 = "B_T_Mortar_01_F";
 F_Art_01 = "B_T_MBT_01_arty_F";
@@ -1669,10 +1666,6 @@ F_Plane_03 = "B_T_VTOL_01_infantry_F";
 F_Plane_04 = "B_T_VTOL_01_vehicle_F";
 F_Plane_05 = "B_T_VTOL_01_armed_F";
 F_Plane_06 = "";
-
-F_Wpn_01= "Box_T_NATO_WpsSpecial_F";
-F_Lnch_01= "Box_NATO_WpsLaunch_F";
-F_Amm_01= "Box_NATO_Ammo_F";
 
 };
 

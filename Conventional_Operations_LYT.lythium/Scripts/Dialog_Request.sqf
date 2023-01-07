@@ -906,7 +906,7 @@ lbSetPictureRight [2103, _index, "Screens\FOBA\uav_05_icon_ca.paa"];
 
 if (count (nearestObjects [position player, ["B_Radar_System_01_F", "I_E_Radar_System_01_F"], 500]) > 0) then { 
 if (isClass (configfile >> "CfgVehicles" >> "USAF_RQ4A") == true ) then {
-_txt = format ["100$ PLANE %1", "USAF_RQ4A"];
+_txt = format ["100$ UAV %1", "USAF_RQ4A"];
 _index = lbAdd [2103, _txt];            
 lbSetColor [2103, _index, [0,1,0,1]];   
 lbSetData [2103, _index, "USAF_RQ4A"];             
@@ -917,7 +917,7 @@ lbSetPictureRight [2103, _index, "Screens\FOBA\uav_05_icon_ca.paa"];
 
 if (count (nearestObjects [position player, ["B_Radar_System_01_F", "I_E_Radar_System_01_F"], 500]) > 0) then { 
 if (isClass (configfile >> "CfgVehicles" >> "USAF_MQ9") == true ) then {
-_txt = format ["120$ PLANE %1", "USAF_MQ9"];
+_txt = format ["120$ UAV %1", "USAF_MQ9"];
 _index = lbAdd [2103, _txt];            
 lbSetColor [2103, _index, [0,1,0,1]];   
 lbSetData [2103, _index, "USAF_MQ9"];             
@@ -1107,41 +1107,20 @@ lbSetPictureRight [2103, _index, "Screens\FOBA\icon_HMG_02_ca.paa"];
 (findDisplay 1599 displayCtrl 2103) lbSetPictureRightColor [_index, [0.2,0.6,0.99,1]];
 };
 
-if (F_Wpn_01 != "") then { 
-_txt = format ["15$ SUPPLIES %1", F_Wpn_01];
+_txt = format ["35$ SUPPLIES %1", "B_CargoNet_01_ammo_F"];
 _index = lbAdd [2103, _txt];            
 lbSetColor [2103, _index, [1,1,1,1]];   
-lbSetData [2103, _index, F_Wpn_01];             
-lbSetValue [2103, _index, 15];             
+lbSetData [2103, _index, "B_CargoNet_01_ammo_F"];             
+lbSetValue [2103, _index, 35];             
 lbSetPictureRight [2103, _index, "Screens\FOBA\box_ca.paa"]; 
 (findDisplay 1599 displayCtrl 2103) lbSetPictureRightColor [_index, [1,1,1,1]];
-};
 
-if (F_Amm_01 != "") then { 
-_txt = format ["15$ SUPPLIES %1", F_Amm_01];
-_index = lbAdd [2103, _txt];            
-lbSetColor [2103, _index, [1,1,1,1]];   
-lbSetData [2103, _index, F_Amm_01];             
-lbSetValue [2103, _index, 15];             
-lbSetPictureRight [2103, _index, "Screens\FOBA\box_ca.paa"]; 
-(findDisplay 1599 displayCtrl 2103) lbSetPictureRightColor [_index, [1,1,1,1]];
-};
 
-if (F_Lnch_01 != "") then { 
-_txt = format ["15$ SUPPLIES %1", F_Lnch_01];
-_index = lbAdd [2103, _txt];            
-lbSetColor [2103, _index, [1,1,1,1]];   
-lbSetData [2103, _index, F_Lnch_01];             
-lbSetValue [2103, _index, 15];             
-lbSetPictureRight [2103, _index, "Screens\FOBA\box_ca.paa"]; 
-(findDisplay 1599 displayCtrl 2103) lbSetPictureRightColor [_index, [1,1,1,1]];
-};
-
-_txt = format ["15$ SUPPLIES %1", "Box_NATO_AmmoVeh_F"];
+_txt = format ["35$ SUPPLIES %1", "Box_NATO_AmmoVeh_F"];
 _index = lbAdd [2103, _txt];            
 lbSetColor [2103, _index, [1,1,1,1]];   
 lbSetData [2103, _index, "Box_NATO_AmmoVeh_F"];             
-lbSetValue [2103, _index, 15];             
+lbSetValue [2103, _index, 35];             
 lbSetPictureRight [2103, _index, "Screens\FOBA\box_ca.paa"]; 
 (findDisplay 1599 displayCtrl 2103) lbSetPictureRightColor [_index, [1,1,1,1]];
 
@@ -1219,6 +1198,71 @@ NEWUNIT = group player createUnit [_SQDName, _pos, [], 0, "FORM"];
 [NEWUNIT,'MENU_COMMS_CAS_HELI',nil,nil,''] call BIS_fnc_addCommMenuItem;	
 [NEWUNIT,'MENU_COMMS_ARTI',nil,nil,''] call BIS_fnc_addCommMenuItem;	
 
+if ((typeOf NEWUNIT == F_Assault_Eng)  || (typeOf NEWUNIT == "B_G_engineer_F")  || (typeOf NEWUNIT == F_Recon_Eng)) then {
+[ NEWUNIT,
+"<img size=2 color='#f37c00' image='\a3\ui_f_oldman\data\IGUI\Cfg\holdactions\repair_ca.paa'/><t font='PuristaBold' color='#f37c00'>REPAIR Vehicles",
+"\a3\ui_f_oldman\data\IGUI\Cfg\holdactions\repair_ca.paa",
+"\a3\ui_f_oldman\data\IGUI\Cfg\holdactions\repair_ca.paa",
+	"_this distance _target < 5",			
+	"_caller distance _target < 5",	
+{(_this select 0) playMove "AinvPknlMstpSnonWnonDnon_medic_1" ; },
+{},
+{
+[(_this select 0)] execVM "Scripts\REPAIRVEH.sqf" ;
+},
+{},
+[],
+10,
+1,
+false,
+false
+] remoteExec ["BIS_fnc_holdActionAdd",0,true];  
+};
+
+
+if ((typeOf NEWUNIT == F_Assault_Amm)  || (typeOf NEWUNIT == "B_G_Soldier_A_F")) then {
+[ NEWUNIT,
+"<img size=2 color='#FFE258' image='Screens\FOBA\mg_ca.paa'/><t font='PuristaBold' color='#FFE258'>REARM Infantry",
+"Screens\FOBA\mg_ca.paa",
+"Screens\FOBA\mg_ca.paa",
+	"_this distance _target < 5",			
+	"_caller distance _target < 5",	
+{(_this select 0) playMove "AinvPknlMstpSnonWnonDnon_medic_1" ; },
+{},
+{
+[(_this select 0)] execVM "Scripts\REARM.sqf" ;
+},
+{},
+[],
+5,
+1,
+false,
+false
+] remoteExec ["BIS_fnc_holdActionAdd",0,true];   
+} ;
+
+
+if ((typeOf NEWUNIT == F_Recon_Med)  || (typeOf NEWUNIT == F_Assault_Med)  || (typeOf NEWUNIT == "B_G_medic_F")  || (typeOf NEWUNIT == "B_CTRG_soldier_M_medic_F")) then {
+[ NEWUNIT,
+"<img size=2 color='#0bff00' image='\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_revive_ca.paa'/><t font='PuristaBold' color='#0bff00'>HEAL Infantry",
+"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_revive_ca.paa",
+"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_revive_ca.paa",
+	"_this distance _target < 5",			
+	"_caller distance _target < 5",	
+{(_this select 0) playMove "AinvPknlMstpSnonWnonDnon_medic_1" ; },
+{},
+{
+[(_this select 0)] execVM "Scripts\HEAL.sqf" ;
+},
+{},
+[],
+5,
+1,
+false,
+false
+] remoteExec ["BIS_fnc_holdActionAdd",0,true];   
+} ;
+
 NEWUNIT linkItem 'B_UavTerminal';
 NEWUNIT addItem 'optic_Hamr';
 if (markerText 'Revive_Handle' == 'Activate') then {{[_x] call AIS_System_fnc_loadAIS;} forEach Units GRPReq;};
@@ -1237,6 +1281,70 @@ publicVariable "GRPReq";
 [_x,'MENU_COMMS_CAS_HELI',nil,nil,''] call BIS_fnc_addCommMenuItem;	
 [_x,'MENU_COMMS_ARTI',nil,nil,''] call BIS_fnc_addCommMenuItem;	
 } foreach Units GRPReq;
+
+{
+[ _x,
+"<img size=2 color='#f37c00' image='\a3\ui_f_oldman\data\IGUI\Cfg\holdactions\repair_ca.paa'/><t font='PuristaBold' color='#f37c00'>REPAIR Vehicles",
+"\a3\ui_f_oldman\data\IGUI\Cfg\holdactions\repair_ca.paa",
+"\a3\ui_f_oldman\data\IGUI\Cfg\holdactions\repair_ca.paa",
+	"_this distance _target < 5",			
+	"_caller distance _target < 5",	
+{(_this select 0) playMove "AinvPknlMstpSnonWnonDnon_medic_1" ; },
+{},
+{
+[(_this select 0)] execVM "Scripts\REPAIRVEH.sqf" ;
+},
+{},
+[],
+10,
+1,
+false,
+false
+] remoteExec ["BIS_fnc_holdActionAdd",0,true]; 
+} forEach (Units GRPReq select { (typeOf _x == F_Assault_Eng)  || (typeOf _x == "B_G_engineer_F")  || (typeOf _x == F_Recon_Eng)   || (typeOf _x == B_CTRG_soldier_engineer_exp_F)} ) ;
+
+{
+[ _x,
+"<img size=2 color='#FFE258' image='Screens\FOBA\mg_ca.paa'/><t font='PuristaBold' color='#FFE258'>REARM Infantry",
+"Screens\FOBA\mg_ca.paa",
+"Screens\FOBA\mg_ca.paa",
+	"_this distance _target < 5",			
+	"_caller distance _target < 5",	
+{(_this select 0) playMove "AinvPknlMstpSnonWnonDnon_medic_1" ; },
+{},
+{
+[(_this select 0)] execVM "Scripts\REARM.sqf" ;
+},
+{},
+[],
+5,
+1,
+false,
+false
+] remoteExec ["BIS_fnc_holdActionAdd",0,true];   
+} forEach (Units GRPReq select { (typeOf _x == F_Assault_Amm)  || (typeOf _x == "B_G_Soldier_A_F") } ) ;
+
+{
+[ _x,
+"<img size=2 color='#0bff00' image='\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_revive_ca.paa'/><t font='PuristaBold' color='#0bff00'>HEAL Infantry",
+"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_revive_ca.paa",
+"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_revive_ca.paa",
+	"_this distance _target < 5",			
+	"_caller distance _target < 5",	
+{(_this select 0) playMove "AinvPknlMstpSnonWnonDnon_medic_1" ; },
+{},
+{
+[(_this select 0)] execVM "Scripts\HEAL.sqf" ;
+},
+{},
+[],
+5,
+1,
+false,
+false
+] remoteExec ["BIS_fnc_holdActionAdd",0,true];   
+} forEach (Units GRPReq select { (typeOf _x == F_Recon_Med)  || (typeOf _x == F_Assault_Med)  || (typeOf _x == "B_G_medic_F")  || (typeOf _x == "B_CTRG_soldier_M_medic_F") } ) ;
+
 
 			private _headlessClients = entities "HeadlessClient_F";
 			private _humanPlayers = allPlayers - _headlessClients;
@@ -1310,83 +1418,98 @@ if (_VehName == "B_Slingload_01_Repair_F") then {
 ]] remoteExec ["addAction",0,true];
 };
 
-if (_VehName == "Box_NATO_AmmoVeh_F") then {
-CreatedVEH addMagazineCargoGlobal ["DemoCharge_Remote_Mag", 7];
-CreatedVEH addMagazineCargoGlobal ["APERSBoundingMine_Range_Mag", 7];
-CreatedVEH addMagazineCargoGlobal ["APERSMine_Range_Mag", 7];
-CreatedVEH addMagazineCargoGlobal ["ClaymoreDirectionalMine_Remote_Mag", 7];
-CreatedVEH addMagazineCargoGlobal ["SLAMDirectionalMine_Wire_Mag", 7];
-CreatedVEH addMagazineCargoGlobal ["B_IR_Grenade", 7];
-CreatedVEH addMagazineCargoGlobal ["SmokeShell", 7];
-CreatedVEH addMagazineCargoGlobal ["HandGrenade", 7];
-
+if (_VehName == "B_CargoNet_01_ammo_F") then {
+CreatedVEH addMagazineCargoGlobal  ["DemoCharge_Remote_Mag", 20];
+CreatedVEH addMagazineCargoGlobal  ["APERSBoundingMine_Range_Mag", 7];
+CreatedVEH addMagazineCargoGlobal  ["APERSMine_Range_Mag", 7];
+CreatedVEH addMagazineCargoGlobal  ["ClaymoreDirectionalMine_Remote_Mag", 7];
+CreatedVEH addMagazineCargoGlobal  ["SLAMDirectionalMine_Wire_Mag", 7];
+CreatedVEH addMagazineCargoGlobal   ["B_IR_Grenade", 7];
+CreatedVEH addMagazineCargoGlobal   ["SmokeShell", 7];
+CreatedVEH addMagazineCargoGlobal   ["HandGrenade", 7];
 CreatedVEH addBackpackCargoGlobal ["B_UAV_01_backpack_F", 2];
 CreatedVEH addBackpackCargoGlobal ["B_Static_Designator_01_weapon_F", 2];
 CreatedVEH addBackpackCargoGlobal ["B_W_Static_Designator_01_weapon_F", 2];
 CreatedVEH addBackpackCargoGlobal ["B_UGV_02_Demining_backpack_F", 2];
 CreatedVEH addBackpackCargoGlobal ["B_Patrol_Respawn_bag_F", 2];
-};
-_BOXName = missionNamespace getVariable "F_Amm_01";
-if (_VehName == _BOXName) then {
-CreatedVEH addMagazineCargoGlobal ["DemoCharge_Remote_Mag", 7];
-CreatedVEH addMagazineCargoGlobal ["APERSBoundingMine_Range_Mag", 7];
-CreatedVEH addMagazineCargoGlobal ["APERSMine_Range_Mag", 7];
-CreatedVEH addMagazineCargoGlobal ["ClaymoreDirectionalMine_Remote_Mag", 7];
-CreatedVEH addMagazineCargoGlobal ["SLAMDirectionalMine_Wire_Mag", 7];
-CreatedVEH addMagazineCargoGlobal ["B_IR_Grenade", 7];
-CreatedVEH addMagazineCargoGlobal ["SmokeShell", 7];
-CreatedVEH addMagazineCargoGlobal ["HandGrenade", 7];
+CreatedVEH addWeaponCargoGlobal ["launch_B_Titan_tna_F", 5];
+CreatedVEH addWeaponCargoGlobal ["launch_B_Titan_F", 5];
+CreatedVEH addWeaponCargoGlobal ["launch_B_Titan_short_F", 5];
+CreatedVEH addWeaponCargoGlobal ["launch_I_Titan_short_F", 5];
+CreatedVEH addWeaponCargoGlobal ["launch_NLAW_F", 5];
+CreatedVEH addMagazineCargoGlobal ["NLAW_F", 15];
+CreatedVEH addMagazineCargoGlobal ["MRAWS_HEAT_F", 15];
+CreatedVEH addMagazineCargoGlobal ["Titan_AT", 15];
+CreatedVEH addMagazineCargoGlobal ["Titan_AA", 15];
+CreatedVEH addMagazineCargoGlobal ["Titan_AP", 15];
 
-CreatedVEH addBackpackCargoGlobal ["B_UAV_01_backpack_F", 2];
-CreatedVEH addBackpackCargoGlobal ["B_Static_Designator_01_weapon_F", 2];
-CreatedVEH addBackpackCargoGlobal ["B_W_Static_Designator_01_weapon_F", 2];
-CreatedVEH addBackpackCargoGlobal ["B_UGV_02_Demining_backpack_F", 2];
-CreatedVEH addBackpackCargoGlobal ["B_Patrol_Respawn_bag_F", 2];
-};
-_BOXName = missionNamespace getVariable "F_Lnch_01";
-if (_VehName == _BOXName) then {
-CreatedVEH addWeaponCargoGlobal ['launch_B_Titan_tna_F', 3];
-CreatedVEH addWeaponCargoGlobal ['launch_B_Titan_F', 3];
-CreatedVEH addWeaponCargoGlobal ['launch_B_Titan_short_F', 3];
-CreatedVEH addWeaponCargoGlobal ['launch_I_Titan_short_F', 3];
-CreatedVEH addWeaponCargoGlobal ['launch_NLAW_F', 3];
-CreatedVEH addMagazineCargoGlobal ['NLAW_F', 7];
-CreatedVEH addMagazineCargoGlobal ['MRAWS_HEAT_F', 7];
-CreatedVEH addMagazineCargoGlobal ['Titan_AT', 7];
-CreatedVEH addMagazineCargoGlobal ['Titan_AA', 7];
-CreatedVEH addMagazineCargoGlobal ['Titan_AP', 7];
+[ CreatedVEH,
+"<img size=2 color='#FFE258' image='Screens\FOBA\mg_ca.paa'/><t font='PuristaBold' color='#FFE258'>ARSENAL",
+"Screens\FOBA\mg_ca.paa",
+"Screens\FOBA\mg_ca.paa",
+	"_this distance _target < 10",			
+	"_caller distance _target < 10",	
+{},
+{},
+{
+	
+	if (isClass (configfile >> "ace_arsenal_loadoutsDisplay") == true ) then {
+		[player, player, true] call ace_arsenal_fnc_openBox;
+	} else {
+		["Open", true] spawn BIS_fnc_arsenal;
+	};
+},
+{},
+[],
+1,
+1,
+false,
+false
+] remoteExec ["BIS_fnc_holdActionAdd",0,true];   
 
-CreatedVEH addBackpackCargoGlobal ["B_UAV_01_backpack_F", 2];
-CreatedVEH addBackpackCargoGlobal ["B_Static_Designator_01_weapon_F", 2];
-CreatedVEH addBackpackCargoGlobal ["B_W_Static_Designator_01_weapon_F", 2];
-CreatedVEH addBackpackCargoGlobal ["B_UGV_02_Demining_backpack_F", 2];
-CreatedVEH addBackpackCargoGlobal ["B_Patrol_Respawn_bag_F", 2];
-};
-
-_BOXName = missionNamespace getVariable "F_Wpn_01";
-if (_VehName == _BOXName) then {
-CreatedVEH addWeaponCargoGlobal ['launch_B_Titan_tna_F', 3];
-CreatedVEH addWeaponCargoGlobal ['launch_B_Titan_F', 3];
-CreatedVEH addWeaponCargoGlobal ['launch_B_Titan_short_F', 3];
-CreatedVEH addWeaponCargoGlobal ['launch_I_Titan_short_F', 3];
-CreatedVEH addWeaponCargoGlobal ['launch_NLAW_F', 3];
-CreatedVEH addMagazineCargoGlobal ['NLAW_F', 7];
-CreatedVEH addMagazineCargoGlobal ['MRAWS_HEAT_F', 7];
-CreatedVEH addMagazineCargoGlobal ['Titan_AT', 7];
-CreatedVEH addMagazineCargoGlobal ['Titan_AA', 7];
-CreatedVEH addMagazineCargoGlobal ['Titan_AP', 7];
-
-CreatedVEH addBackpackCargoGlobal ["B_UAV_01_backpack_F", 2];
-CreatedVEH addBackpackCargoGlobal ["B_Static_Designator_01_weapon_F", 2];
-CreatedVEH addBackpackCargoGlobal ["B_W_Static_Designator_01_weapon_F", 2];
-CreatedVEH addBackpackCargoGlobal ["B_UGV_02_Demining_backpack_F", 2];
-CreatedVEH addBackpackCargoGlobal ["B_Patrol_Respawn_bag_F", 2];
+[ CreatedVEH,
+"<img size=2 color='#FFE258' image='Screens\FOBA\mg_ca.paa'/><t font='PuristaBold' color='#FFE258'>REARM Infantry",
+"Screens\FOBA\mg_ca.paa",
+"Screens\FOBA\mg_ca.paa",
+	"_this distance _target < 10",			
+	"_caller distance _target < 10",	
+{},
+{},
+{
+[(_this select 0)] execVM "Scripts\REARM.sqf" ;
+},
+{},
+[],
+1,
+1,
+false,
+false
+] remoteExec ["BIS_fnc_holdActionAdd",0,true];   
 
 };
+
 
 _MOBSERName = missionNamespace getVariable "F_Truck_04";
 if (_VehName == _MOBSERName) then {
 [CreatedVEH, -1, west, "LIGHT"] execVM "R3F_LOG\USER_FUNCT\init_creation_factory.sqf" ;
+[ CreatedVEH,
+"<img size=2 color='#f37c00' image='\a3\ui_f_oldman\data\IGUI\Cfg\holdactions\repair_ca.paa'/><t font='PuristaBold' color='#f37c00'>REPAIR Vehicles",
+"Screens\FOBA\mg_ca.paa",
+"Screens\FOBA\mg_ca.paa",
+	"_this distance _target < 10",			
+	"_caller distance _target < 10",	
+{},
+{},
+{
+[(_this select 0)] execVM "Scripts\REPAIRVEH.sqf" ;
+},
+{},
+[],
+10,
+1,
+false,
+false
+] remoteExec ["BIS_fnc_holdActionAdd",0,true]; 
 };
 	
 _MOBSERName = missionNamespace getVariable "F_Truck_03";
@@ -1396,14 +1519,59 @@ if (_VehName == _MOBSERName) then {
 "<img size=2 color='#FFE258' image='Screens\FOBA\mg_ca.paa'/><t font='PuristaBold' color='#FFE258'>ARSENAL",
 "Screens\FOBA\mg_ca.paa",
 "Screens\FOBA\mg_ca.paa",
-"true",       
-"_caller distance _target < 40",  
+	"_this distance _target < 10",			
+	"_caller distance _target < 10",	
 {},
 {},
-{["Open", true] spawn BIS_fnc_arsenal;},
+{
+	
+	if (isClass (configfile >> "ace_arsenal_loadoutsDisplay") == true ) then {
+		[player, player, true] call ace_arsenal_fnc_openBox;
+	} else {
+		["Open", true] spawn BIS_fnc_arsenal;
+	};
+},
 {},
 [],
 1,
+1,
+false,
+false
+] remoteExec ["BIS_fnc_holdActionAdd",0,true];   
+
+[ CreatedVEH,
+"<img size=2 color='#FFE258' image='Screens\FOBA\mg_ca.paa'/><t font='PuristaBold' color='#FFE258'>REARM Infantry",
+"Screens\FOBA\mg_ca.paa",
+"Screens\FOBA\mg_ca.paa",
+	"_this distance _target < 10",			
+	"_caller distance _target < 10",	
+{},
+{},
+{
+[(_this select 0)] execVM "Scripts\REARM.sqf" ;
+},
+{},
+[],
+5,
+1,
+false,
+false
+] remoteExec ["BIS_fnc_holdActionAdd",0,true];   
+
+[ CreatedVEH,
+"<img size=2 color='#FFE258' image='Screens\FOBA\mg_ca.paa'/><t font='PuristaBold' color='#FFE258'>REARM Vehicles",
+"Screens\FOBA\mg_ca.paa",
+"Screens\FOBA\mg_ca.paa",
+	"_this distance _target < 10",			
+	"_caller distance _target < 10",	
+{},
+{},
+{
+[(_this select 0)] execVM "Scripts\REARMVEH.sqf" ;
+},
+{},
+[],
+10,
 1,
 false,
 false

@@ -140,3 +140,21 @@ if (count ((units OLDGRP) select {alive _x == true}) > 0) then {
 						  };
 		};
 };
+
+
+player addAction
+	[
+	"<t color='#7CC2FF'>" + localize "STR_KPPLM_ACTIONOPEN" + "</t>",
+    {[] call KPPLM_fnc_openDialog;},
+	nil,
+    -803,
+	true,		
+	true,		
+	"",			
+	"true", 	
+	5,			
+	false,		
+	"",			
+	""			
+];
+   

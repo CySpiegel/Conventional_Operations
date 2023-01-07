@@ -1,41 +1,44 @@
 // Music Mission EventHandler////////////////////////////////////////////////////////////
 
-addMusicEventHandler ["MusicStop", {
-_allTracks = [ 
-"LeadTrack01_F_EPA", 
-"LeadTrack02_F_EPA",
-"LeadTrack01_F",
-"MainTheme_F_Tank",
-"LeadTrack01_F_Mark",
-"AmbientTrack03_F",
-"AmbientTrack04a_F",
-"BackgroundTrack01_F",
-"Track02_SolarPower",
-"Track14_MainMenu",
-"EventTrack01a_F_EPA",
-"EventTrack01_F_EPA",
-"EventTrack02a_F_EPA",
-"EventTrack03_F_EPA",
-"EventTrack03a_F_EPA",
-"LeadTrack01_F_EPB",
-"LeadTrack02_F_EPC",
-"LeadTrack04_F_EPC",
-"LeadTrack06_F_EPC",
-"LeadTrack06b_F_EPC",
-"BackgroundTrack03_F_EPC",
-"LeadTrack02_F_EXP",
-"AmbientTrack01_F_EXP",
-"AmbientTrack02_F_EXP",
-"LeadTrack02_F_Jets",
-"LeadTrack01_F_Orange"
-]; 
+ MusicSwitchVal = "MusicSwitch" call BIS_fnc_getParamValue;
+ if (MusicSwitchVal == 1) then {
+			 
+		addMusicEventHandler ["MusicStop", {
+		_allTracks = [ 
+		"LeadTrack01_F_EPA", 
+		"LeadTrack02_F_EPA",
+		"LeadTrack01_F",
+		"MainTheme_F_Tank",
+		"LeadTrack01_F_Mark",
+		"AmbientTrack03_F",
+		"AmbientTrack04a_F",
+		"BackgroundTrack01_F",
+		"Track02_SolarPower",
+		"Track14_MainMenu",
+		"EventTrack01a_F_EPA",
+		"EventTrack01_F_EPA",
+		"EventTrack02a_F_EPA",
+		"EventTrack03_F_EPA",
+		"EventTrack03a_F_EPA",
+		"LeadTrack01_F_EPB",
+		"LeadTrack02_F_EPC",
+		"LeadTrack04_F_EPC",
+		"LeadTrack06_F_EPC",
+		"LeadTrack06b_F_EPC",
+		"BackgroundTrack03_F_EPC",
+		"LeadTrack02_F_EXP",
+		"AmbientTrack01_F_EXP",
+		"AmbientTrack02_F_EXP",
+		"LeadTrack02_F_Jets",
+		"LeadTrack01_F_Orange"
+		]; 
 
 
-_Track = selectRandom _allTracks;
-playMusic _Track;
+		_Track = selectRandom _allTracks;
+		playMusic _Track;
 
-}];
-
+		}];
+ };
 
 //Server Script //////////Server Script //////////Server Script //////////Server Script //////////Server Script //////////Server Script //////////Server Script //////////Server Script //////////Server Script //////////Server Script //////////
 
@@ -73,13 +76,12 @@ MENU_COMMS_SUPPLYDROP =
 [
 	["MenuName", true],
 	["Vehicle Quad Bike 10$", [2], "", -5, [["expression", "execVM 'Scripts\SupplyDrop_QDB.sqf';"]], "1", "1", "\A3\ui_f\data\IGUI\Cfg\Cursors\iconcursorsupport_ca.paa"],
-	["Vehicle Quad Bike 25$", [2], "", -5, [["expression", "execVM 'Scripts\SupplyDrop_QDB.sqf';"]], "1", "1", "\A3\ui_f\data\IGUI\Cfg\Cursors\iconcursorsupport_ca.paa"],
+	["Vehicle Boat 25$", [2], "", -5, [["expression", "execVM 'Scripts\SupplyDrop_BT.sqf';"]], "1", "1", "\A3\ui_f\data\IGUI\Cfg\Cursors\iconcursorsupport_ca.paa"],
 	["OP Container 100$", [3], "", -5, [["expression", "execVM 'Scripts\SupplyDrop_OP.sqf';"]], "1", "1", "\A3\ui_f\data\IGUI\Cfg\Cursors\iconcursorsupport_ca.paa"],
 	["FOB Container 5000$", [4], "", -5, [["expression", "execVM 'Scripts\SupplyDrop_FOB.sqf';"]], "1", "1", "\A3\ui_f\data\IGUI\Cfg\Cursors\iconcursorsupport_ca.paa"],
-	["Supplies VEHICLE AMMO 15$", [5], "", -5, [["expression", "execVM 'Scripts\SupplyDrop_EXP.sqf';"]], "1", "1", "\A3\ui_f\data\IGUI\Cfg\Cursors\iconcursorsupport_ca.paa"],
-	["Supplies WEAPONS 15$", [6], "", -5, [["expression", "execVM 'Scripts\SupplyDrop_WPN.sqf';"]], "1", "1", "\A3\ui_f\data\IGUI\Cfg\Cursors\iconcursorsupport_ca.paa"],
-	["Supplies LAUNCHERS 15$", [7], "", -5, [["expression", "execVM 'Scripts\SupplyDrop_LNC.sqf';"]], "1", "1", "\A3\ui_f\data\IGUI\Cfg\Cursors\iconcursorsupport_ca.paa"],
-	["Supplies AMMUNITION 15$", [8], "", -5, [["expression", "execVM 'Scripts\SupplyDrop_AMM.sqf';"]], "1", "1", "\A3\ui_f\data\IGUI\Cfg\Cursors\iconcursorsupport_ca.paa"]
+	["Supplies VEHICLE AMMO 35$", [5], "", -5, [["expression", "execVM 'Scripts\SupplyDrop_EXP.sqf';"]], "1", "1", "\A3\ui_f\data\IGUI\Cfg\Cursors\iconcursorsupport_ca.paa"],
+	["Supplies INFANTRY AMMO 35$", [6], "", -5, [["expression", "execVM 'Scripts\SupplyDrop_WPN.sqf';"]], "1", "1", "\A3\ui_f\data\IGUI\Cfg\Cursors\iconcursorsupport_ca.paa"]
+
 ];
 
 MENU_COMMS_UAV_RECON =
