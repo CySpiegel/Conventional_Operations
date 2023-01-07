@@ -39,18 +39,17 @@ if (hasInterface) then {
     player addEventHandler ["GetOutMan", {[] call KPPLM_fnc_getInOut}];
 
     // Action to open the dialog
-player addAction
-	[
-	"<t color='#FF8000'>" + localize "STR_KPPLM_ACTIONOPEN" + "</t>",
-    {[] call KPPLM_fnc_openDialog;},
-	nil,
-    -803,
-	false,
-	true,
-	"",
-    '_target isEqualTo _originalTarget'
-   ];
-
+    private _actionArray = [
+        "<t color='#FF8000'>" + localize "STR_KPPLM_ACTIONOPEN" + "</t>",
+        {[] call KPPLM_fnc_openDialog;},
+        nil,
+        -803,
+        false,
+        true,
+        "",
+        '_target isEqualTo _originalTarget'
+    ];
+    [_actionArray] call CBA_fnc_addPlayerAction;
 
     // Apply default/loaded values
     [] call KPPLM_fnc_apply;

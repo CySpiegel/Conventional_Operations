@@ -39,6 +39,9 @@ KPPLM_tpv = lbCurSel _ctrlTpv;
 KPPLM_radio = lbCurSel _ctrlRadio;
 KPPLM_soundVeh = (round sliderPosition _ctrlSliderSound) / 100;
 
+// Save settings in user profile
+profileNamespace setVariable ["KPPLM_Settings", [KPPLM_viewFoot, KPPLM_viewVeh, KPPLM_viewAir, KPPLM_terrain, KPPLM_tpv, KPPLM_radio, KPPLM_soundVeh]];
+saveProfileNamespace;
 
 // Apply settings
 [] call KPPLM_fnc_apply;
