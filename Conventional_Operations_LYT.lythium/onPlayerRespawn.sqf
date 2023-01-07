@@ -140,3 +140,5 @@ if (count ((units OLDGRP) select {alive _x == true}) > 0) then {
 						  };
 		};
 };
+
+
