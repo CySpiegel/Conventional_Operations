@@ -1,4 +1,6 @@
 
+if (isServer) then { 
+
 [[west,"HQ"], "Saving Mission ..."] remoteExec ["sideChat", 0];
 
 
@@ -234,3 +236,4 @@ profileNamespace setVariable [_ObjectDataName, _ObjectDataHash];
 
 [[west,"HQ"], "Mission Saved !"] remoteExec ["sideChat", 0];
 
+};

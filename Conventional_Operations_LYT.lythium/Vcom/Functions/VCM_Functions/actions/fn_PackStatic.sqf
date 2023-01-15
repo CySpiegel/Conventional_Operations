@@ -19,8 +19,6 @@ params ["_unit","_backpack","_staticCreated"];
 
 sleep 10;
 
-if (side _unit == west) exitWith {};
-
 private _staticGreen = true;
 private _statictime = 180;
 

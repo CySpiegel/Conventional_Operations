@@ -2,6 +2,7 @@
 
  ////////////////////////////////////////////////Intro
 MissionLoadedLitterally = 0 ; 
+publicVariable "MissionLoadedLitterally";
 
         titleText ["B.S.P Group Presents...", "BLACK IN",9999];
 		5 fadeSound 0;
@@ -29,9 +30,9 @@ if (isServer) then {
 		 };
 	};
 
-sleep 5;
+sleep 10;
  ////////////////////////////////////////////////Mission Loading - Variables // Server & HC
-if ((isServer) && !(didJIP)) then { _Load = execVM "Scripts\MissionLoad.sqf"; waitUntil { scriptDone _Load }; 
+if (isServer) then { _Load = execVM "Scripts\MissionLoad.sqf"; waitUntil { scriptDone _Load }; 
 TRG1LOCC = 0;
 publicVariable "TRG1LOCC";
 TRG2LOCC = 0;
@@ -58,15 +59,15 @@ AVENGLOCC = 1 ;
 publicVariable "AVENGLOCC";
 };
 
-sleep 3;
+sleep 2;
 
-if !(didJIP) then {
+
 waitUntil {MissionLoadedLitterally == 1};
-}; 
+
 
 ////////////////////////////////////////////// //Mission Parameters   // TheCommander ////////////////////////////////////////////////
 
-sleep 3;
+sleep 2;
 
 if ((count (allMapMarkers select {markerType _x == "loc_SafetyZone"}) != 7) && (player == TheCommander) && (not didJIP)) then { execVM "Scripts\Dialog_Faction.sqf"; };
 waitUntil {(count (allMapMarkers select {markerType _x == "loc_SafetyZone"}) == 7) && (count (allMapMarkers select {markerText _x == "Respawn"}) > 0)};
@@ -271,7 +272,7 @@ if (isServer) then {
 
 if (isServer) then {
 [] spawn {  
-while { sleep 90 ; alive TheCommander } do{  
+while { sleep 90 ; time > 0  } do{  
  
  _allENMMarks = allMapMarkers select {markerShape _x == "RECTANGLE"};   
 	{deleteMarker _x} forEach _allENMMarks ;

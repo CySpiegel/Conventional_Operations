@@ -8,6 +8,8 @@ VCM_PublicScript = compileFinal "[] call (_this select 0);";
 VCM_ServerAsk = compileFinal "if (isServer) then {publicvariable (_this select 0);};";
 
 
+/*
+Reasoning for removal: It's best to have Vcom running for ALL clients. Vcom was designed from the ground up to ONLY run on AI LOCAL to the machine running the commands. This enables HC support, hotswapping of AI between CPUS, and better consistency over several hours with multiple disconnects/changes of HC's or AI owners.
 
 if 
 !(
@@ -15,7 +17,7 @@ if
 	!hasInterface || 
 	allCurators findIf {getAssignedCuratorUnit _x == player} == -1
 ) exitWith {};
-
+*/
 
 //Parameters
 [] call compile preprocessFileLineNumbers "Vcom\Functions\VCOMAI_DefaultSettings.sqf"; //Load default settings
@@ -23,7 +25,7 @@ if (isFilePatchingEnabled && {"" != loadFile "\userconfig\VCOM_AI\AISettingsV4.h
 {
 	[] call compile preprocessFileLineNumbers "\userconfig\VCOM_AI\AISettingsV4.hpp"; //Overwrite with userconfig
 };
-
+if (isClass (configfile >> "CfgPatches" >> "cba_settings")) then {[] call VCM_fnc_CBA_Settings}; //Overwrite with CBA settings
 
 //Mod checks
 //ACE CHECK

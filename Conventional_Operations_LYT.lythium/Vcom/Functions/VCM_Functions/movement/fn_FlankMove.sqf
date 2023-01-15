@@ -18,8 +18,6 @@ params ["_leader", "_moveType"];
 private _grp = group _leader;
 if (_grp getVariable ["VCM_NOFLANK",false]) exitWith {};
 
-if (side ((units _grp) select 0) == west) exitWith {};
-
 //Lets define types of attack we can do.
 private _wayPointType = selectRandom ["Assault","High","Low","Retreat","Flank","FlankL"];
 

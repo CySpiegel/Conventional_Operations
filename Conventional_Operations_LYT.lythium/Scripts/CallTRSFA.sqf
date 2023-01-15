@@ -97,6 +97,70 @@ false,
 false   
 ] call BIS_fnc_holdActionAdd;  } forEach Units AsltGrp;
 
+
+{
+[ _x,
+"<img size=2 color='#f37c00' image='\a3\ui_f_oldman\data\IGUI\Cfg\holdactions\repair_ca.paa'/><t font='PuristaBold' color='#f37c00'>REPAIR Vehicles",
+"\a3\ui_f_oldman\data\IGUI\Cfg\holdactions\repair_ca.paa",
+"\a3\ui_f_oldman\data\IGUI\Cfg\holdactions\repair_ca.paa",
+	"_this distance _target < 5",			
+	"_caller distance _target < 5",	
+{(_this select 0) playMove "AinvPknlMstpSnonWnonDnon_medic_1" ; },
+{},
+{
+[(_this select 0)] execVM "Scripts\REPAIRVEH.sqf" ;
+},
+{},
+[],
+10,
+1,
+false,
+false
+] remoteExec ["BIS_fnc_holdActionAdd",0,true]; 
+} forEach (Units AsltGrp select { (typeOf _x == F_Assault_Eng)  || (typeOf _x == "B_G_engineer_F")  || (typeOf _x == F_Recon_Eng)   || (typeOf _x == B_CTRG_soldier_engineer_exp_F)} ) ;
+
+{
+[ _x,
+"<img size=2 color='#FFE258' image='Screens\FOBA\mg_ca.paa'/><t font='PuristaBold' color='#FFE258'>REARM Infantry",
+"Screens\FOBA\mg_ca.paa",
+"Screens\FOBA\mg_ca.paa",
+	"_this distance _target < 5",			
+	"_caller distance _target < 5",	
+{(_this select 0) playMove "AinvPknlMstpSnonWnonDnon_medic_1" ; },
+{},
+{
+[(_this select 0)] execVM "Scripts\REARM.sqf" ;
+},
+{},
+[],
+5,
+1,
+false,
+false
+] remoteExec ["BIS_fnc_holdActionAdd",0,true];   
+} forEach (Units AsltGrp select { (typeOf _x == F_Assault_Amm)  || (typeOf _x == "B_G_Soldier_A_F") } ) ;
+
+{
+[_x,[
+	"<img size=2 color='#0bff00' image='\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_revive_ca.paa'/><t font='PuristaBold' color='#0bff00'>HEAL Infantry",
+{
+(_this select 0) playMove "AinvPknlMstpSnonWnonDnon_medic_1" ; 
+[(_this select 0)] execVM "Scripts\HEAL.sqf" ;
+},
+	nil,
+	0,
+	true,
+	true,
+	"",
+	"_this distance _target < 5", // _target, _this, _originalTarget
+	5,
+	false,
+	"",
+	""
+]] remoteExec ["addAction",0,true];
+} forEach (Units AsltGrp select { (typeOf _x == F_Recon_Med)  || (typeOf _x == F_Assault_Med)  || (typeOf _x == "B_G_medic_F")  || (typeOf _x == "B_CTRG_soldier_M_medic_F") } ) ;
+
+
 {	{[_x] execVM "Scripts\LDTInit.sqf" ;} forEach Units AsltGrp ;  } remoteExec ["call", 2];
 
 _WP = _GSHPGroup addWaypoint [_CAST, 0];
@@ -255,24 +319,23 @@ false
 } forEach (Units AsltGrp select { (typeOf _x == F_Assault_Amm)  || (typeOf _x == "B_G_Soldier_A_F") } ) ;
 
 {
-[ _x,
-"<img size=2 color='#0bff00' image='\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_revive_ca.paa'/><t font='PuristaBold' color='#0bff00'>HEAL Infantry",
-"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_revive_ca.paa",
-"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_revive_ca.paa",
-	"_this distance _target < 5",			
-	"_caller distance _target < 5",	
-{(_this select 0) playMove "AinvPknlMstpSnonWnonDnon_medic_1" ; },
-{},
+[_x,[
+	"<img size=2 color='#0bff00' image='\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_revive_ca.paa'/><t font='PuristaBold' color='#0bff00'>HEAL Infantry",
 {
+(_this select 0) playMove "AinvPknlMstpSnonWnonDnon_medic_1" ; 
 [(_this select 0)] execVM "Scripts\HEAL.sqf" ;
 },
-{},
-[],
-5,
-1,
-false,
-false
-] remoteExec ["BIS_fnc_holdActionAdd",0,true];   
+	nil,
+	0,
+	true,
+	true,
+	"",
+	"_this distance _target < 5", // _target, _this, _originalTarget
+	5,
+	false,
+	"",
+	""
+]] remoteExec ["addAction",0,true];
 } forEach (Units AsltGrp select { (typeOf _x == F_Recon_Med)  || (typeOf _x == F_Assault_Med)  || (typeOf _x == "B_G_medic_F")  || (typeOf _x == "B_CTRG_soldier_M_medic_F") } ) ;
 
 {	{[_x] execVM "Scripts\LDTInit.sqf" ;} forEach Units AsltGrp ;  } remoteExec ["call", 2];

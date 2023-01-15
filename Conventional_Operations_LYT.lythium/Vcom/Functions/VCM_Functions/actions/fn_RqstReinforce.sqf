@@ -17,8 +17,6 @@ private _rtrn = false;
 
 if (!(_group call VCM_fnc_GroupHasRadio) || _group getVariable ["VCM_TOUGHSQUAD", false]) exitWith {_rtrn};
 
-if (side ((units _group) select 0) == west) exitWith {};
-
 // Calculate enemy forces value
 private _knownEnemyG = ([_leader, 500, false] call VCM_fnc_KnownEnemyGroupArray);
 private _enemyValue = 0;

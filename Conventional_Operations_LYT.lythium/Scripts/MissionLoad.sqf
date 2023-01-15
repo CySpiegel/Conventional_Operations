@@ -1,4 +1,5 @@
 
+if (isServer) then { 
 
 _missionTag = missionName;
 _missionTag = [_missionTag] call BIS_fnc_filterString;
@@ -109,4 +110,5 @@ sleep 2 ;
 MissionLoadedLitterally = 1 ;
 publicVariable "MissionLoadedLitterally";
 
+}; 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -181,7 +181,9 @@ openMap true;
  _x enableAI "ANIM"; 
  _x enableAI "AUTOCOMBAT";  
  
- [_x, false] remoteExecCall ["AIS_System_fnc_unconcsiousRemote", 0];  
+		_x call AIS_Effects_fnc_removeinjuredMarker;
+			[_x, 50] call AIS_system_fnc_reveal;
+
  [_x, false] remoteExec ["setCaptive", 0, false]; 
   
  ["GetOutMan"] remoteExec ["removeAllEventHandlers", _x, false];

@@ -932,18 +932,18 @@ _txt = format ["80$ UAV %1", F_UAV_01];
 _index = lbAdd [2103, _txt];            
 lbSetColor [2103, _index, [1,1,1,1]];   
 lbSetData [2103, _index, F_UAV_01];             
-lbSetValue [2103, _index, 55];             
+lbSetValue [2103, _index, 80];             
 lbSetPictureRight [2103, _index, "Screens\FOBA\uav_05_icon_ca.paa"]; 
 (findDisplay 1599 displayCtrl 2103) lbSetPictureRightColor [_index, [1,1,1,1]];
 };};
 
 if (count (nearestObjects [position player, ["B_Radar_System_01_F", "I_E_Radar_System_01_F"], 500]) > 0) then { 
 if (F_UAV_02 != "") then { 
-_txt = format ["08$ UAV %1", F_UAV_02];
+_txt = format ["80$ UAV %1", F_UAV_02];
 _index = lbAdd [2103, _txt];            
 lbSetColor [2103, _index, [1,1,1,1]];   
 lbSetData [2103, _index, F_UAV_02];             
-lbSetValue [2103, _index, 55];             
+lbSetValue [2103, _index, 80];             
 lbSetPictureRight [2103, _index, "Screens\FOBA\uav_05_icon_ca.paa"]; 
 (findDisplay 1599 displayCtrl 2103) lbSetPictureRightColor [_index, [1,1,1,1]];
 };};
@@ -954,7 +954,7 @@ _txt = format ["80$ UAV %1", F_UAV_03];
 _index = lbAdd [2103, _txt];            
 lbSetColor [2103, _index, [1,1,1,1]];   
 lbSetData [2103, _index, F_UAV_03];             
-lbSetValue [2103, _index, 55];             
+lbSetValue [2103, _index, 80];             
 lbSetPictureRight [2103, _index, "Screens\FOBA\uav_05_icon_ca.paa"]; 
 (findDisplay 1599 displayCtrl 2103) lbSetPictureRightColor [_index, [1,1,1,1]];
 };};
@@ -1193,6 +1193,8 @@ if (_Cost == 3) then {
 
 NEWUNIT = group player createUnit [_SQDName, _pos, [], 0, "FORM"];
 
+if (markerText "Revive_Handle" == "Activate") then {[NEWUNIT] call AIS_System_fnc_loadAIS; };
+
 [NEWUNIT,'MENU_COMMS_SUPPLYDROP',nil,nil,''] call BIS_fnc_addCommMenuItem;
 [NEWUNIT,'MENU_COMMS_UAV_RECON',nil,nil,''] call BIS_fnc_addCommMenuItem;
 [NEWUNIT,'MENU_COMMS_CAS_HELI',nil,nil,''] call BIS_fnc_addCommMenuItem;	
@@ -1243,24 +1245,23 @@ false
 
 
 if ((typeOf NEWUNIT == F_Recon_Med)  || (typeOf NEWUNIT == F_Assault_Med)  || (typeOf NEWUNIT == "B_G_medic_F")  || (typeOf NEWUNIT == "B_CTRG_soldier_M_medic_F")) then {
-[ NEWUNIT,
-"<img size=2 color='#0bff00' image='\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_revive_ca.paa'/><t font='PuristaBold' color='#0bff00'>HEAL Infantry",
-"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_revive_ca.paa",
-"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_revive_ca.paa",
-	"_this distance _target < 5",			
-	"_caller distance _target < 5",	
-{(_this select 0) playMove "AinvPknlMstpSnonWnonDnon_medic_1" ; },
-{},
+[NEWUNIT,[
+	"<img size=2 color='#0bff00' image='\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_revive_ca.paa'/><t font='PuristaBold' color='#0bff00'>HEAL Infantry",
 {
+(_this select 0) playMove "AinvPknlMstpSnonWnonDnon_medic_1" ; 
 [(_this select 0)] execVM "Scripts\HEAL.sqf" ;
 },
-{},
-[],
-5,
-1,
-false,
-false
-] remoteExec ["BIS_fnc_holdActionAdd",0,true];   
+	nil,
+	0,
+	true,
+	true,
+	"",
+	"_this distance _target < 5", // _target, _this, _originalTarget
+	5,
+	false,
+	"",
+	""
+]] remoteExec ["addAction",0,true]; 
 } ;
 
 NEWUNIT linkItem 'B_UavTerminal';
@@ -1282,6 +1283,25 @@ publicVariable "GRPReq";
 [_x,'MENU_COMMS_ARTI',nil,nil,''] call BIS_fnc_addCommMenuItem;	
 } foreach Units GRPReq;
 
+			private _headlessClients = entities "HeadlessClient_F";
+			private _humanPlayers = allPlayers - _headlessClients;
+			hcRemoveAllGroups player;  
+			 {player hcRemoveGroup _x ;} forEach (allGroups select {side _x == west}); 
+			 _GRPs = (allGroups select {(side _x == (side player)) && !(((units _x) select 0) in switchableUnits)}); 
+			if (count _humanPlayers == 1 ) then {
+			{player hcSetGroup [_x];} forEach _GRPs;
+			}else{
+			{TheCommander hcSetGroup [_x];} forEach _GRPs;
+			};
+			
+{_x enableAI 'RADIOPROTOCOL';} foreach Units GRPReq;
+if (markerText 'Revive_Handle' == 'Activate') then {{[_x] call AIS_System_fnc_loadAIS;} forEach Units GRPReq;};
+
+
+{	{[_x] execVM "Scripts\LDTInit.sqf" ; } forEach Units GRPReq ;  } remoteExec ["call", 2];
+{_x enableAI 'RADIOPROTOCOL'} foreach Units GRPReq;
+	closeDialog 0;
+	
 {
 [ _x,
 "<img size=2 color='#f37c00' image='\a3\ui_f_oldman\data\IGUI\Cfg\holdactions\repair_ca.paa'/><t font='PuristaBold' color='#f37c00'>REPAIR Vehicles",
@@ -1301,7 +1321,7 @@ publicVariable "GRPReq";
 false,
 false
 ] remoteExec ["BIS_fnc_holdActionAdd",0,true]; 
-} forEach (Units GRPReq select { (typeOf _x == F_Assault_Eng)  || (typeOf _x == "B_G_engineer_F")  || (typeOf _x == F_Recon_Eng)   || (typeOf _x == B_CTRG_soldier_engineer_exp_F)} ) ;
+} forEach (Units GRPReq select { (typeOf _x == F_Assault_Eng)  || (typeOf _x == "B_G_engineer_F")  || (typeOf _x == F_Recon_Eng)  || (typeOf _x == "B_CTRG_soldier_engineer_exp_F")} ) ;
 
 {
 [ _x,
@@ -1324,46 +1344,25 @@ false
 ] remoteExec ["BIS_fnc_holdActionAdd",0,true];   
 } forEach (Units GRPReq select { (typeOf _x == F_Assault_Amm)  || (typeOf _x == "B_G_Soldier_A_F") } ) ;
 
+	{
+[_x,[
+	"<img size=2 color='#0bff00' image='\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_revive_ca.paa'/><t font='PuristaBold' color='#0bff00'>HEAL Infantry",
 {
-[ _x,
-"<img size=2 color='#0bff00' image='\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_revive_ca.paa'/><t font='PuristaBold' color='#0bff00'>HEAL Infantry",
-"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_revive_ca.paa",
-"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_revive_ca.paa",
-	"_this distance _target < 5",			
-	"_caller distance _target < 5",	
-{(_this select 0) playMove "AinvPknlMstpSnonWnonDnon_medic_1" ; },
-{},
-{
+(_this select 0) playMove "AinvPknlMstpSnonWnonDnon_medic_1" ; 
 [(_this select 0)] execVM "Scripts\HEAL.sqf" ;
 },
-{},
-[],
-5,
-1,
-false,
-false
-] remoteExec ["BIS_fnc_holdActionAdd",0,true];   
+	nil,
+	0,
+	true,
+	true,
+	"",
+	"_this distance _target < 5", // _target, _this, _originalTarget
+	5,
+	false,
+	"",
+	""
+]] remoteExec ["addAction",0,true];
 } forEach (Units GRPReq select { (typeOf _x == F_Recon_Med)  || (typeOf _x == F_Assault_Med)  || (typeOf _x == "B_G_medic_F")  || (typeOf _x == "B_CTRG_soldier_M_medic_F") } ) ;
-
-
-			private _headlessClients = entities "HeadlessClient_F";
-			private _humanPlayers = allPlayers - _headlessClients;
-			hcRemoveAllGroups player;  
-			 {player hcRemoveGroup _x ;} forEach (allGroups select {side _x == west}); 
-			 _GRPs = (allGroups select {(side _x == (side player)) && !(((units _x) select 0) in switchableUnits)}); 
-			if (count _humanPlayers == 1 ) then {
-			{player hcSetGroup [_x];} forEach _GRPs;
-			}else{
-			{TheCommander hcSetGroup [_x];} forEach _GRPs;
-			};
-			
-{_x enableAI 'RADIOPROTOCOL';} foreach Units GRPReq;
-if (markerText 'Revive_Handle' == 'Activate') then {{[_x] call AIS_System_fnc_loadAIS;} forEach Units GRPReq;};
-
-
-{	{[_x] execVM "Scripts\LDTInit.sqf" ; } forEach Units GRPReq ;  } remoteExec ["call", 2];
-{_x enableAI 'RADIOPROTOCOL'} foreach Units GRPReq;
-	closeDialog 0;
 
 }; }else{ 
    

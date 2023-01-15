@@ -11,7 +11,7 @@ _objectLocT = allMapMarkers select { markerType _x == "n_support"};
 	
 _trg = createTrigger ["EmptyDetector", getMarkerpos _x, false];
 _trg setTriggerArea [2000, 2000, 0, false, 100];
-_trg setTriggerTimeout [7, 7, 7, true];
+_trg setTriggerTimeout [1, 1, 1, true];
 _trg setTriggerActivation ["WEST", "PRESENT", false];
 _trg setTriggerStatements [
 "this","
@@ -43,7 +43,7 @@ _ARRAY = [ _COM ] call LARs_fnc_getCompObjects;
 
 _trgA = createTrigger ['EmptyDetector', (getPos thisTrigger), false];
 _trgA setTriggerArea [1000, 1000, 0, false, 100];
-_trgA setTriggerTimeout [15, 15, 15, true];
+_trgA setTriggerTimeout [7, 7, 7, true];
 _trgA setTriggerActivation ['WEST', 'PRESENT', false];
 _trgA setTriggerStatements [
 ""this"",""
@@ -103,7 +103,7 @@ _objectLocT = allMapMarkers select { markerType _x == "loc_Ruin" };
 
 _trg = createTrigger ["EmptyDetector", getMarkerpos _x, false];
 _trg setTriggerArea [2000, 2000, 0, false, 100];
-_trg setTriggerTimeout [7, 7, 7, true];
+_trg setTriggerTimeout [1, 1, 1, true];
 _trg setTriggerActivation ["WEST", "PRESENT", false];
 _trg setTriggerStatements [
 "this","
@@ -206,8 +206,7 @@ _objectLocT = allMapMarkers select { markerType _x == "loc_Power" };
 	
 _trg = createTrigger ["EmptyDetector", getMarkerpos _x, false];
 _trg setTriggerArea [2000, 2000, 0, false, 100];
-_trg setTriggerInterval 3;
-_trg setTriggerTimeout [7, 7, 7, true];
+_trg setTriggerTimeout [1, 1, 1, true];
 _trg setTriggerActivation ["WEST", "PRESENT", false];
 _trg setTriggerStatements [
 "this","	
@@ -275,7 +274,6 @@ deleteMarker _M ;
 
 _trgA = createTrigger ['EmptyDetector', (getPos thisTrigger), false];
 _trgA setTriggerArea [1000, 1000, 0, false, 100];
-_trgA setTriggerInterval 3;
 _trgA setTriggerTimeout [7, 7, 7, true];
 _trgA setTriggerActivation ['WEST', 'PRESENT', false];
 _trgA setTriggerStatements [
@@ -314,7 +312,6 @@ _objectLocT = allMapMarkers select { markerType _x == "o_plane" };
 
 _trgA = createTrigger ["EmptyDetector", getMarkerpos _x];
 _trgA setTriggerArea [3000, 3000, 0, false, 1000];
-_trgA setTriggerInterval 3;
 _trgA setTriggerTimeout [1, 1, 1, true];
 _trgA setTriggerActivation ["WEST", "PRESENT", false];
 _trgA setTriggerStatements [
@@ -338,7 +335,7 @@ _objectLocT = allMapMarkers select { markerType _x == "o_naval" };
 _trgA = createTrigger ["EmptyDetector", getMarkerpos _x];
 _trgA setTriggerArea [3000, 3000, 0, false, 100];
 _trgA setTriggerInterval 3;
-_trgA setTriggerTimeout [7, 7, 7, true];
+_trgA setTriggerTimeout [1, 1, 1, true];
 _trgA setTriggerActivation ["WEST", "PRESENT", false];
 _trgA setTriggerStatements [
 "this","

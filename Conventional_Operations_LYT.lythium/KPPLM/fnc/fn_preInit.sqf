@@ -23,13 +23,13 @@ if (isServer) then {diag_log format ["[KP PLAYER MENU] [%1] [PRE] Initializing..
 KPPLM_KPR = isClass (configFile >> "CfgPatches" >> "KP_Ranks");
 
 // View distance on foot
-KPPLM_viewFoot = viewDistance;
+KPPLM_viewFoot = 2000;
 
 // View distance in land vehicle
-KPPLM_viewVeh = viewDistance;
+KPPLM_viewVeh = 3000;
 
 // View distance in air vehicle
-KPPLM_viewAir = viewDistance;
+KPPLM_viewAir = 4000;
 
 // Terrain detail setting
 KPPLM_terrain = 2;

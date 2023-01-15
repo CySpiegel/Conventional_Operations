@@ -10,8 +10,7 @@ _objectLocT = allMapMarkers select { markerType _x == "o_installation"};
 {
 _trg = createTrigger ["EmptyDetector", getMarkerpos _x, false];
 _trg setTriggerArea [2000, 2000, 0, false, 100];
-_trg setTriggerInterval 3;
-_trg setTriggerTimeout [7, 7, 7, true];
+_trg setTriggerTimeout [1, 1, 1, true];
 _trg setTriggerActivation ["WEST", "PRESENT", false];
 _trg setTriggerStatements [
 "this","
@@ -20,8 +19,7 @@ _trg setTriggerStatements [
 
 _trgA = createTrigger ['EmptyDetector', (getPos thisTrigger), false];
 _trgA setTriggerArea [1000, 1000, 0, false, 100];
-_trgA setTriggerInterval 3;
-_trgA setTriggerTimeout [13, 13, 13, true];
+_trgA setTriggerTimeout [7, 7, 7, true];
 _trgA setTriggerActivation ['WEST', 'PRESENT', false];
 _trgA setTriggerStatements [
 ""this"",""
@@ -170,10 +168,10 @@ _TWR = nearestobjects [(getMarkerPos _x), ["Land_TTowerBig_2_F", "Land_TTowerBig
 
 [
 	_TWR,											
-	"Intercept Comms",										
-	"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_connect_ca.paa",	
-	"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_connect_ca.paa",	
-	"_this distance _target < 10 && count (allMapMarkers select { markerText _x == ""Radio""}) == 0 ",						
+	"<img size=2 color='#f37c00' image='\a3\ui_f_oldman\data\IGUI\Cfg\holdactions\repair_ca.paa'/><t font='PuristaBold' color='#f37c00'>INTERCEPT COMMS",										
+	"\a3\ui_f_oldman\data\IGUI\Cfg\holdactions\repair_ca.paa",	
+	"\a3\ui_f_oldman\data\IGUI\Cfg\holdactions\repair_ca.paa",	
+	"_this distance _target < 10",						
 	"_caller distance _target < 10",						
 	{
 	playSound3D ["a3\missions_f_oldman\data\sound\intel_laptop\2sec\intel_laptop_2sec_03.wss", (_this select 0)]; 

@@ -41,13 +41,9 @@ private _ctrlValueSound = _dialog displayCtrl 7580316;
 private _ctrlSliderSound = _dialog displayCtrl 7580317;
 
 // Display KP Ranks data or hide the player menu entries for the data
-if (KPPLM_KPR) then {
+
     [] call KPPLM_fnc_showRankData;
-} else {
-    {
-        _x ctrlShow false;
-    } forEach [_ctrlLabelRank, _ctrlRank, _ctrlLabelScore, _ctrlScore, _ctrlLabelPlaytime, _ctrlPlaytime];
-};
+
 
 // Fill group list with all groups leaded by players
 {

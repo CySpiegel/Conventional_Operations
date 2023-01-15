@@ -3,6 +3,7 @@ _GroupMarks = allMapMarkers select {markerType _x == "b_unknown" && markerColor 
 _GRP = [(getMarkerpos _x), WEST, (parseSimpleArray (markerText _x))] call BIS_fnc_spawnGroup ; 
 LoadGroup = createGroup West;
 publicVariable "LoadGroup";
+
 {[_x] join LoadGroup} forEach units _GRP;
 _L = (units LoadGroup) select 0;
 
@@ -42,7 +43,7 @@ if (markerText "Revive_Handle" == "Activate") then {{[_x] call AIS_System_fnc_lo
 false,
 false
 ] remoteExec ["BIS_fnc_holdActionAdd",0,true]; 
-} forEach (Units LoadGroup select { (typeOf _x == F_Assault_Eng)  || (typeOf _x == "B_G_engineer_F")  || (typeOf _x == F_Recon_Eng)   || (typeOf _x == B_CTRG_soldier_engineer_exp_F)} ) ;
+} forEach (Units LoadGroup select { (typeOf _x == F_Assault_Eng)  || (typeOf _x == "B_G_engineer_F")  || (typeOf _x == F_Recon_Eng)   || (typeOf _x == "B_CTRG_soldier_engineer_exp_F")} ) ;
 
 {
 [ _x,
@@ -66,24 +67,23 @@ false
 } forEach (Units LoadGroup select { (typeOf _x == F_Assault_Amm)  || (typeOf _x == "B_G_Soldier_A_F") } ) ;
 
 {
-[ _x,
-"<img size=2 color='#0bff00' image='\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_revive_ca.paa'/><t font='PuristaBold' color='#0bff00'>HEAL Infantry",
-"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_revive_ca.paa",
-"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_revive_ca.paa",
-	"_this distance _target < 5",			
-	"_caller distance _target < 5",	
-{(_this select 0) playMove "AinvPknlMstpSnonWnonDnon_medic_1" ; },
-{},
+[_x,[
+	"<img size=2 color='#0bff00' image='\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_revive_ca.paa'/><t font='PuristaBold' color='#0bff00'>HEAL Infantry",
 {
+(_this select 0) playMove "AinvPknlMstpSnonWnonDnon_medic_1" ; 
 [(_this select 0)] execVM "Scripts\HEAL.sqf" ;
 },
-{},
-[],
-5,
-1,
-false,
-false
-] remoteExec ["BIS_fnc_holdActionAdd",0,true];   
+	nil,
+	0,
+	true,
+	true,
+	"",
+	"_this distance _target < 5", // _target, _this, _originalTarget
+	5,
+	false,
+	"",
+	""
+]] remoteExec ["addAction",0,true];
 } forEach (Units LoadGroup select { (typeOf _x == F_Recon_Med)  || (typeOf _x == F_Assault_Med)  || (typeOf _x == "B_G_medic_F")  || (typeOf _x == "B_CTRG_soldier_M_medic_F") } ) ;
 
 TheCommander hcSetGroup [LoadGroup];

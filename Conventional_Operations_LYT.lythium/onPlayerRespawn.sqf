@@ -12,41 +12,33 @@ player assignCurator ZEUS;
 };
 
 
+removeAllActions player;
 
+ player setDamage 0; 
+  player setVariable ["ais_stabilized", true, true];
+  player setVariable ["ais_unconscious", false, true];
 
-if ((typeOf player == F_Assault_Eng)  || (typeOf player == "B_G_engineer_F")) then {
-[ player,
-'Repair | Refuel | Rearm 5$',
-'Screens\FOBA\iconRepairAt_ca.paa',
-'Screens\FOBA\iconRepairAt_ca.paa',
-'count nearestobjects [ (position player), ["Air", "Ship", "LandVehicle"], 6] > 0',       
-'_caller distance _target < 7',  
-{},
-{},
-{
-_Cost = 5 ;
-_mrkrs = allMapMarkers select {markerColor _x == 'Color2_FD_F'};
-_mrkr = _mrkrs select 0;
-_Money = parseNumber (markerText _mrkr) ;  
-if (_Money >= _Cost) then {
-_NewMoney = _Money - _Cost; 
-_mrkr setMarkerText str _NewMoney;
+  player setVariable ["ais_fireDamage", 0]; 
+ 
+ [player] remoteExecCall ["AIS_System_fnc_restoreFaks", player, false]; 
+ 
+  [true] remoteExec ["showHud", player]; 
+   [true] remoteExecCall ["AIS_Effects_fnc_toggleRadio", player, false]; 
+ 
+  player stop false; 
+ player enableAI "MOVE";    
+ player enableAI "TARGET"; 
+ player enableAI "AUTOTARGET"; 
+ player enableAI "ANIM"; 
+ player enableAI "AUTOCOMBAT";  
+ 
+		player call AIS_Effects_fnc_removeinjuredMarker;
+			[player, 50] call AIS_system_fnc_reveal;
 
-_nearVeh = nearestObjects [Player,['Air','Ship','LandVehicle'],10] select 0; 
-_nearVeh setDammage 0;
-_nearVeh setFuel 1;
-_nearVeh setVehicleAmmo 1;
-}else{hint 'Not Enough Recources';};
-},
-{},
-[],
-11,
-0,
-false,
-false
-] call BIS_fnc_holdActionAdd;
-
-};
+ [player, false] remoteExec ["setCaptive", 0, false]; 
+  
+ ["GetOutMan"] remoteExec ["removeAllEventHandlers", player, false];
+ 
 
 if ((typeOf  player == F_Recon_Eod) || (typeOf  player == F_Recon_Med) || (typeOf  player == F_Recon_Eng) ||  (typeOf  player == F_Recon_Mg) || (typeOf  player == F_Recon_AT) || (typeOf  player == F_Recon_Mrk) || (typeOf  player == F_Recon_TL) || (typeOf player == "B_G_Soldier_TL_F")) then {
 [
@@ -79,7 +71,6 @@ playMusic 'LeadTrack02_F_Mark';
 };
 
 if ((typeOf player == F_Assault_Uav) || (typeOf player == F_Assault_Med) || (typeOf player == F_Assault_AT) || (typeOf player == F_Assault_Amm) || (typeOf player == F_Assault_Mg) || (typeOf player == F_Assault_Eod) || (typeOf player == F_Assault_Mrk) || (typeOf player == F_Assault_SL) || (typeOf player == F_Assault_TL) || (typeOf player == "B_G_Soldier_SL_F")) then {
-removeAllActions player;
 [ player,   
  "<img size=2 color='#FFE496' image='Screens\FOBA\b_hq.paa'/><t font='PuristaBold' color='#FFE496'>Deploy Sandbags",   
 '',   
@@ -111,6 +102,67 @@ if ((typeOf player == F_Diver_Eod) || (typeOf player == F_Diver_Rfl) || (typeOf 
 
 };
 
+if ((typeOf player == F_Assault_Eng)  || (typeOf player == "B_G_engineer_F")  || (typeOf player == F_Recon_Eng)) then {
+[ player,
+"<img size=2 color='#f37c00' image='\a3\ui_f_oldman\data\IGUI\Cfg\holdactions\repair_ca.paa'/><t font='PuristaBold' color='#f37c00'>REPAIR Vehicles",
+"\a3\ui_f_oldman\data\IGUI\Cfg\holdactions\repair_ca.paa",
+"\a3\ui_f_oldman\data\IGUI\Cfg\holdactions\repair_ca.paa",
+	"_this distance _target < 5",			
+	"_caller distance _target < 5",	
+{(_this select 0) playMove "AinvPknlMstpSnonWnonDnon_medic_1" ; },
+{},
+{
+[(_this select 0)] execVM "Scripts\REPAIRVEH.sqf" ;
+},
+{},
+[],
+10,
+1,
+false,
+false
+] remoteExec ["BIS_fnc_holdActionAdd",0,true];  
+};
+
+if ((typeOf player == F_Assault_Amm)  || (typeOf player == "B_G_Soldier_A_F")) then {
+[ player,
+"<img size=2 color='#FFE258' image='Screens\FOBA\mg_ca.paa'/><t font='PuristaBold' color='#FFE258'>REARM Infantry",
+"Screens\FOBA\mg_ca.paa",
+"Screens\FOBA\mg_ca.paa",
+	"_this distance _target < 5",			
+	"_caller distance _target < 5",	
+{(_this select 0) playMove "AinvPknlMstpSnonWnonDnon_medic_1" ; },
+{},
+{
+[(_this select 0)] execVM "Scripts\REARM.sqf" ;
+},
+{},
+[],
+5,
+1,
+false,
+false
+] remoteExec ["BIS_fnc_holdActionAdd",0,true];   
+} ;
+
+if ((typeOf player == F_Recon_Med)  || (typeOf player == F_Assault_Med)  || (typeOf player == "B_G_medic_F")  || (typeOf player == "B_CTRG_soldier_M_medic_F")) then {
+[player,[
+	"<img size=2 color='#0bff00' image='\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_revive_ca.paa'/><t font='PuristaBold' color='#0bff00'>HEAL Infantry",
+{
+(_this select 0) playMove "AinvPknlMstpSnonWnonDnon_medic_1" ; 
+[(_this select 0)] execVM "Scripts\HEAL.sqf" ;
+},
+	nil,
+	0,
+	true,
+	true,
+	"",
+	"_this distance _target < 5", // _target, _this, _originalTarget
+	5,
+	false,
+	"",
+	""
+]] remoteExec ["addAction",0,true]; 
+} ;
 
 sleep 1 ;
 
@@ -142,3 +194,19 @@ if (count ((units OLDGRP) select {alive _x == true}) > 0) then {
 };
 
 
+player addAction
+	[
+	"<t color='#7CC2FF'>" + localize "STR_KPPLM_ACTIONOPEN" + "</t>",
+    {[] call KPPLM_fnc_openDialog;},
+	nil,
+    -803,
+	true,		
+	true,		
+	"",			
+	"true", 	
+	5,			
+	false,		
+	"",			
+	""			
+];
+   

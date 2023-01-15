@@ -84,9 +84,10 @@ openMap [false, false];
 ShowHUD [true, true, true, true, true, true, true, true, true, true];
 {_x enableAI "RADIOPROTOCOL"} foreach Units Group player;
 
+removeAllActions player;
 
 if ((typeOf  player == F_Recon_Eod) || (typeOf  player == F_Recon_Med) || (typeOf  player == F_Recon_Eng) ||  (typeOf  player == F_Recon_Mg) || (typeOf  player == F_Recon_AT) || (typeOf  player == F_Recon_Mrk) || (typeOf  player == F_Recon_TL) || (typeOf player == "B_G_Soldier_TL_F") || (typeOf player == "F_Assault_Amm")  || (typeOf player == "B_G_Soldier_AR_F") || (typeOf player == "B_G_Soldier_M_F")  || (typeOf player == "B_G_Soldier_LAT_F") || (typeOf player == "B_G_Soldier_exp_F")) then {
-removeAllActions player;
+
 [
 	player,											
 	'H.A.L.O',										
@@ -114,7 +115,7 @@ playMusic 'LeadTrack02_F_Mark';
 };
 
 if ((typeOf player == F_Assault_Uav) || (typeOf player == F_Assault_Med) || (typeOf player == F_Assault_AT) || (typeOf player == F_Assault_Amm) || (typeOf player == F_Assault_Mg) || (typeOf player == F_Assault_Eod) || (typeOf player == F_Assault_Mrk) || (typeOf player == F_Assault_SL) || (typeOf player == F_Assault_TL) || (typeOf player == "B_G_Soldier_SL_F") || (typeOf player == "B_CTRG_Sharphooter_F") || (typeOf player == "B_CTRG_soldier_engineer_exp_F") || (typeOf player == "B_CTRG_soldier_GL_LAT_F") || (typeOf player == "B_CTRG_soldier_AR_A_F")) then {
-removeAllActions player;
+
 [ player,   
  "<img size=2 color='#FFE496' image='Screens\FOBA\b_hq.paa'/><t font='PuristaBold' color='#FFE496'>Deploy Sandbags",   
 '',   
@@ -149,7 +150,6 @@ _L addItem 'optic_Hamr';
 };
 
 if ((typeOf player == F_Diver_Eod) || (typeOf player == F_Diver_Rfl) || (typeOf player == F_Diver_TL) || (typeOf player == "B_T_Diver_F")) then {
-removeAllActions player;
 [player] call EtV_Actions;
 };
 
@@ -196,24 +196,23 @@ false
 } ;
 
 if ((typeOf player == F_Recon_Med)  || (typeOf player == F_Assault_Med)  || (typeOf player == "B_G_medic_F")  || (typeOf player == "B_CTRG_soldier_M_medic_F")) then {
-[ player,
-"<img size=2 color='#0bff00' image='\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_revive_ca.paa'/><t font='PuristaBold' color='#0bff00'>HEAL Infantry",
-"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_revive_ca.paa",
-"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_revive_ca.paa",
-	"_this distance _target < 5",			
-	"_caller distance _target < 5",	
-{(_this select 0) playMove "AinvPknlMstpSnonWnonDnon_medic_1" ; },
-{},
+[player,[
+	"<img size=2 color='#0bff00' image='\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_revive_ca.paa'/><t font='PuristaBold' color='#0bff00'>HEAL Infantry",
 {
+(_this select 0) playMove "AinvPknlMstpSnonWnonDnon_medic_1" ; 
 [(_this select 0)] execVM "Scripts\HEAL.sqf" ;
 },
-{},
-[],
-5,
-1,
-false,
-false
-] remoteExec ["BIS_fnc_holdActionAdd",0,true];   
+	nil,
+	0,
+	true,
+	true,
+	"",
+	"_this distance _target < 5", // _target, _this, _originalTarget
+	5,
+	false,
+	"",
+	""
+]] remoteExec ["addAction",0,true];
 } ;
 
 

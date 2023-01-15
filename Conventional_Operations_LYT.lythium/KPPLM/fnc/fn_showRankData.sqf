@@ -22,18 +22,26 @@ private _dialog = findDisplay 75803;
 private _ctrlRank = _dialog displayCtrl 758032;
 private _ctrlScore = _dialog displayCtrl 758034;
 private _ctrlPlaytime = _dialog displayCtrl 758036;
+
+/*
 private _ctrlNoRanks = _dialog displayCtrl 758037;
 
 // Disable no ranks hint
 _ctrlNoRanks ctrlShow false;
+*/
+
+_SCR = str ((getPlayerScores player) select 5) ;
+
+_rank = roleDescription player;
+
+_TIM = str time ;
 
 // Show data in dialog
-_ctrlRank ctrlSetText ([] call KPR_fnc_getRankName);
-if (KPR_levelSystem) then {
-    _ctrlScore ctrlSetText str ([] call KPR_fnc_getScore);
-} else {
-    _ctrlScore ctrlSetText (localize "STR_KPPLM_NOLVLSYSTEM");
-};
-_ctrlPlaytime ctrlSetText ([] call KPR_fnc_getPlaytime);
+
+_ctrlRank ctrlSetText _rank;
+
+_ctrlScore ctrlSetText _SCR;
+
+_ctrlPlaytime ctrlSetText _TIM;
 
 true

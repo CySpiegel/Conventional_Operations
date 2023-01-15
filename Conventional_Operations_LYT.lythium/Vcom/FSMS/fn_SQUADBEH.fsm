@@ -456,15 +456,15 @@ class FSM
                 {
                         name = "Full_Check";
                         itemno = 17;
-                        init = /*%FSM<STATEINIT""">*/"" \n
-                         "" \n
+                        init = /*%FSM<STATEINIT""">*/"(_Group call VCM_fnc_KitChk) params [""_MedList"",""_L1""];" \n
+                         "_L1 params [""_StaticList"",""_SatchelList"",""_MineList""];" \n
                          "_BackbkC = time;" \n
                          "" \n
                          "if VCM_AIHEALING then {_group call VCM_fnc_MedicalHandler;};" \n
                          "" \n
                          "if (VCM_FRMCHANGE && {!(_group getVariable [""VCM_DisableForm"",false])}) then" \n
                          "{" \n
-                         "" \n
+                         "	_leader call VCM_fnc_FrmChnge;" \n
                          "};	"/*%FSM</STATEINIT""">*/;
                         precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
                         class Links
